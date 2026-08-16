@@ -1,0 +1,105 @@
+/*
+Autor: Facundo Martino
+Última actualización: 10/07/2026
+*/
+
+/* Reset */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: #161618;
+    color: white;
+}
+
+.pagina-register{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-card{
+    background-color: #1E1E21;
+    border: 1px solid rgba(249,115,22,.12);
+    width: 420px;
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.opciones-register{
+    display: flex;
+    background-color: #161618;
+    margin-bottom: 25px;
+}
+
+.opciones-register a{
+    width: 50%;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #8A8A96;
+}
+
+.opciones-register .activo{
+    background-color: #F97316;
+    color: white;
+}
+
+.register-card h2{
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.nombre-completo{
+    display: flex;
+    gap: 10px;
+}
+
+.nombre-completo .campo{
+    width: 50%;
+}
+
+.campo{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.campo label{
+    color: #8A8A96;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.campo input{
+    background-color: #161618;
+    border: 1px solid #333;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.campo input:focus{
+    outline: none;
+    border-color: #F97316;
+}
+
+.register-card button{
+    width: 100%;
+    background-color: #F97316;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.register-card button:hover{
+    background-color: #FF8C38;
+}

@@ -1,0 +1,304 @@
+/*
+Autor: Franco Pirez
+Última actualización: 8/07/2026
+*/
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Header */
+header {
+    padding: 12px 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161618;
+    color: white;
+}
+.header-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.logo {
+    height: 30px;
+}
+.menu{
+    display: flex;
+    gap: 20px;
+}
+.menu a{
+    text-decoration: none;
+    color: #8a8a96;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    font-weight: normal;
+    padding: 10px;
+}
+
+.menu a:hover{
+    color: #f0ede8;
+}
+
+.header-derecha{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login{
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color .3s ease;
+}
+
+.login:hover{
+    color: #f0ede8;
+}
+
+.register{
+    text-decoration: none;
+    color: #f97316;
+    border: 1px solid #f97316;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition:color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+.register:hover{
+    background-color: #f97316;
+    color: #161618;
+}
+
+/* Body */
+body{
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #0C0C0E;
+    color: white;
+}
+
+main{
+    padding: 20px 30px;
+}
+
+/* Breadcrumb */
+.breadcrumb{
+    font-size: small;
+    display: flex;
+    gap: 5px;
+    margin:20px 30px;
+    color: #8A8A96;
+}
+
+.breadcrumb a{
+    text-decoration: none;
+    color: white;
+}
+
+.breadcrumb a:hover {
+    color: #F97316;
+}
+/* Producto */
+.producto{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.imagenes img{
+    border-radius: 12px;
+    margin-left: 30px;
+    width: 400px;
+}
+/* Tarjeta sobre el producto, su precio y compra*/
+.info-producto{
+    background-color: #1E1E21;
+    border: 1px solid rgba(249,115,22,.12);
+    border-radius: 2px;
+    margin-top: 15px;
+    padding: 20px;
+    width: 360px;
+}
+.info-producto h1{
+    color: #F0EDE8;
+    text-align: center;
+}
+
+.info-producto .precio{
+    color: #F97316;
+    font-size: x-large;
+}
+
+.info-producto .stock{
+    color: #8A8A96;
+}
+
+#comprar-btn{
+    background-color: #F97316;
+    color: #161618;
+    margin-top: 3%;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+}
+
+#comprar-btn:hover{
+    background-color: #FF8C38;
+}
+
+/* Descripcion */
+.desc-producto{
+    width: 80%;
+    margin: 15px auto;
+    padding: 25px;
+    border:1px solid#d48a42 ;
+    border-radius: 10px;
+    
+}
+
+.desc-producto h2{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.desc-producto h3{
+    margin-bottom: 10px;
+}
+.desc-producto hr{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.desc-producto p {
+    line-height: 1.6;
+    font-size: smaller;
+}
+
+.desc-producto ul{
+    margin-left: 20px;
+    font-size: smaller;
+}
+
+.desc-producto li{
+    margin-bottom: 8px;
+}
+
+.productos-relacionados{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+}
+.productos-relacionados .tarjeta1 h4{
+    text-align: center;
+}
+.productos-relacionados .tarjeta1 img{
+    margin: 20px;
+}
+.productos-relacionados .tarjeta2 h4{
+    text-align: center;
+}
+.productos-relacionados .tarjeta2 img{
+    margin: 20px;
+    padding: 1px;
+    width: 300px;
+    height: 380px
+}
+.productos-relacionados .tarjeta3 h4{
+    text-align: center;
+}
+.productos-relacionados .tarjeta3 img{
+    width: 300px;
+    margin: 20px;
+}
+
+/* Footer */
+footer{
+
+    background:#181818;
+
+    text-align:center;
+
+    padding:35px;
+
+    border-top:3px solid #d48a42;
+
+}
+
+footer h3{
+
+    color:#d48a42;
+
+    margin-bottom:15px;
+
+}
+
+footer p{
+
+    margin:8px;
+
+    color:#dcdcdc;
+
+}
+
+/*Responsive*/
+
+
+/*Tablet*/
+
+@media (max-width:1024px){
+
+    .producto{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .productos-relacionados{
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+}
+
+/* Celular */
+
+@media (max-width:768px){
+
+    header{
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .menu{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .producto{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .info-producto{
+        width: 100%;
+    }
+
+    .desc-producto{
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .productos-relacionados{
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

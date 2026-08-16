@@ -1,0 +1,48 @@
+<!--
+Autor: Facundo Martino
+Última actualización: 10/07/2026
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <main class="pagina-login">
+    <section class="login-card">
+      
+      <!-- Apartado para elegir si quieres iniciar sesión o registrarte -->
+      <div class="opciones-login">
+        <a href="login.html" class="activo">Iniciar sesión</a>
+        <a href="register.html">Crear cuenta</a>
+      </div>
+
+      <!-- Formulario para iniciar sesión -->
+      <h2>Bienvenido de nuevo</h2>
+      <div class="campo">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" placeholder="tucorreo@email.com">
+      </div>
+
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input type="password" id="contrasena" placeholder="Contraseña">
+      </div>
+
+      <div class="recordar-datos">
+        <label>
+        <input type="checkbox">Recordarme</label>
+        <a href="#">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <button>Iniciar sesión</button>
+    </section>
+  </main>
+</body>
+</html>

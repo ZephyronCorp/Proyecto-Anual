@@ -1,0 +1,250 @@
+/*
+Autor: Eric Leyes
+Última actualización: 12/07/2026
+*/
+
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Estilos generales del sitio */
+body{
+    background:#111;
+    color:white;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    padding: 12px 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161618;
+    color: white;
+}
+.header-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.logo {
+    height: 30px;
+}
+.menu{
+    display: flex;
+    gap: 20px;
+}
+.menu a{
+    text-decoration: none;
+    color: #8a8a96;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    font-weight: normal;
+    padding: 10px;
+}
+
+.menu a:hover{
+    color: #f0ede8;
+}
+
+.header-derecha{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login{
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color .3s ease;
+}
+
+.login:hover{
+    color: #f0ede8;
+}
+
+.register{
+    text-decoration: none;
+    color: #f97316;
+    border: 1px solid #f97316;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition:color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+.register:hover{
+    background-color: #f97316;
+    color: #161618;
+}
+
+/* Banner principal */
+.hero{
+    height:320px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),
+    url("../assets/skyrim.jpeg");
+    background-size:cover;
+    background-position:center;
+}
+
+/* Título y descripción del banner */
+.hero h2{
+    font-size:48px;
+    color:#ff7300;
+    font-family:Orbitron;
+}
+
+.hero p{
+    margin-top:15px;
+    font-size:20px;
+}
+
+/* Catálogo de productos */
+.catalogo{
+    width:90%;
+    margin:50px auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:35px;
+}
+
+/* Tarjetas de productos */
+.card{
+    background:#1b1b1b;
+    border:2px solid #2b2b2b;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.35s;
+}
+
+/* Efecto al pasar el mouse sobre la tarjeta */
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#ff7300;
+    box-shadow:0px 0px 20px rgba(255,115,0,.45);
+}
+
+/* Imagen del producto */
+.card img{
+    width:100%;
+    display:block;
+}
+
+/* Nombre del producto */
+.card h3{
+    margin:20px;
+}
+
+/* Precio del producto */
+.card p{
+    margin:0 20px;
+    color:#ff7300;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* Botón para acceder al producto */
+.card button{
+    margin:20px;
+    width:85%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#ff7300;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.card button:hover{
+    background:#ff9800;
+}
+
+/* Enlace dentro de la tarjeta */
+.card a{
+    text-decoration:none;
+    color:white;
+}
+/* Footer */
+footer{
+
+    background:#181818;
+
+    text-align:center;
+
+    padding:35px;
+
+    border-top:3px solid #d48a42;
+
+}
+
+footer h3{
+
+    color:#d48a42;
+
+    margin-bottom:15px;
+
+}
+
+footer p{
+
+    margin:8px;
+
+    color:#dcdcdc;
+
+}
+
+/*  Diseño responsive */
+
+/* Tablets */
+@media (max-width:1024px){
+
+    header{
+        padding:12px 20px;
+    }
+
+    .catalogo{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+/* Celulares */
+@media (max-width:768px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .header-izquierda{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .header-derecha{
+        justify-content:center;
+    }
+
+    .hero h2{
+        font-size:32px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .catalogo{
+        grid-template-columns:1fr;
+        width:85%;
+    }
+}

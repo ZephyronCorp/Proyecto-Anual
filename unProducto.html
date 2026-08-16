@@ -1,0 +1,128 @@
+<!--
+Autor: Franco Pirez
+Última actualización: 8/07/2026
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/unProducto.css">
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" sizes="512x512">
+    <title>Astro Bot</title>
+</head>
+<body>
+    <!-- Header con logo y barra de navegación. -->
+    <header>
+        <div class="header-izquierda">
+            <img src="assets/Logo completo.png" alt="Logo empresa" class="logo">
+
+            <nav class="menu">
+                <a href="index.html">Inicio</a>
+                <a href="Catalogo.html">Catálogo</a>
+            </nav>
+        </div>
+        <!-- Más adelante se agregará el carrito -->
+        <div class="header-derecha">
+            <a href="login.html" class="login">Ingresar</a>
+            <a href="register.html" class="register">Registrarse</a>
+        </div>
+</header>
+
+    <!-- Contenido principal de la página -->
+    
+    <main>
+        <nav class="breadcrumb">
+
+            <a href="index.html">Inicio</a>
+            <span>></span>
+            <a href="Catalogo.html">Catálogo</a>
+            <span>></span>
+            <span>Astro Bot</span>
+            
+        </nav>
+
+        <section class ="producto">
+
+            <div class="imagenes">
+                <img src="assets/AstroBot.jpg" alt="Astro Bot PS5">
+            </div>
+
+            <div class="info-producto">
+
+                <h1>Astro Bot</h1>
+                <p class="precio">$2.500</p>
+
+                <div class="stock">
+                    <p><strong>Disponibilidad</strong>: 5 artículos disponibles.</p>
+                </div>
+
+                <div>
+                    <button id="comprar-btn">Comprar</button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="desc-producto">
+
+            <h2>Descripción</h2>
+            <br>
+
+            <h3>Jugabilidad y Niveles</h3>
+            <p>Es un plataformas clásico y colorido que ofrece más de 80 niveles repartidos en seis galaxias. El diseño destaca por su variedad, incorporando jefes finales y el uso de potenciadores (como guantes de boxeo o propulsores) que cambian la forma en que te desplazas.</p>
+            <br>
+
+            <h3>La Tripulación</h3>
+            <p>La misión principal es rescatar a 300 bots perdidos por el cosmos, de los cuales casi la mitad son homenajes o referencias a personajes legendarios de la historia de los videojuegos (como Kratos de God of War o Solid Snake).</p>
+            <br>
+
+            <h3>Base de Operaciones (Hub)</h3>
+            <p>Todos los robots que rescatas regresan a la base, que funciona como un mundo interactivo lleno de vida donde puedes desbloquear accesorios y personalizar tu apariencia.</p>
+            <br>
+
+            <h3>Inmersión del Mando</h3>
+            <p>El juego aprovecha al máximo la retroalimentación háptica y los gatillos adaptativos del control de PlayStation 5, permitiéndote sentir diferentes texturas, climas y movimientos de manera muy realista.</p>
+            <br>
+
+            <h3>Detalles Técnicos</h3>
+                <ul>
+                    <li>Exclusivo de PlayStation 5</li>
+                    <li>Peso del juego: 12 GB</li>
+                    <li>Requerido en consola: 24 GB</li>
+                </ul>  
+        </section>
+
+        <!-- Sección con los productos relacionados -->
+        
+        <h2>Productos Relacionados</h2>
+        <section class="productos-relacionados">
+            <article class="tarjeta1">
+                <img src="assets/JuegoRE9.jpg" alt="Resident 9 Requiem PS5">
+                <h4>Resident 9 Requiem</h4>
+            </article>
+            <article class="tarjeta2">
+                <img src="assets/AstroBotFunko.png" alt="Funko Pop Leon S Kennedy">
+                <h4>Funko Pop Astro Bot</h4>
+            </article>
+            <article class="tarjeta3">
+                <img src="assets/GOWRag.jpg" alt="God of War: Ragnarok PS5">
+                <h4>God of War: Ragnarok</h4>
+            </article>
+        </section>
+    </main>
+    <!-- Pie de página -->
+    <footer>
+        <hr>
+        <h3>Contacto</h3>
+
+        <p>Correo electrónico: zonajoystick26@gmail.com</p>
+
+        <p>Teléfono: +589 97 951 885</p>
+
+        <p>Centro, Montevideo Uruguay</p>
+        <p>&copy; Creado por Zephyron Corp.</p>
+    </footer>
+</body>
+</html>
