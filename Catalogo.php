@@ -1,7 +1,13 @@
-<!--
-Autor: Eric Leyes
-Ultima actualizacion: 29/08/2026
--->
+<!--Autor: Eric Leyes Ultima actualizacion: 02/09/2026-->
+
+
+<?php
+    require_once 'php/conexion.php';
+    $sql = "SELECT * FROM productos";
+    $resultado = mysqli_query($conexion, $sql);
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -35,53 +41,31 @@ Ultima actualizacion: 29/08/2026
         <p>Videojuegos • Figuras • Manga • TCG</p>
     </section>
 
+
     <!-- Sección de catálogo -->
     <section class="catalogo">
+        <?php if (mysqli_num_rows($resultado) > 0): ?>
+            <?php while ($producto = mysqli_fetch_assoc($resultado)): ?>
+                <?php $sinStock = $producto['stock'] == 0; ?>
+                <div class="card">
+                    <div class="imagen-producto"><img src="<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>"></div>
+                    <h3><?php echo $producto['nombre']; ?></h3>
+                    <p class="precio">$<?php echo $producto['precio']; ?></p>
+                    <button id="carrito-btn"
+                    data-id="<?php echo $producto['id']; ?>"
+                    data-nombre="<?php echo $producto['nombre']; ?>"
+                    data-precio="<?php echo $producto['precio']; ?>"
+                    <?php echo $sinStock ? 'disabled' : ''; ?>
 
-        <div class="card">
-            <a href="unProducto.html">
-            <img src="assets/AstroBot.jpg" alt="Astro Bot PS5">
-            <h3>Astro Bot</h3>
-            <p>$2500</p>
-            <button id="carrito-btn">Agregar al carrito</button>
-            </a>
+                    >
+                    Agregar al carrito</button>
+                </div>
+
+            <?php endwhile; ?>
+            <?php else: ?>
+                <p>No hay productos disponibles en este momento.</p> 
+            <?php endif; ?>
         </div>
-
-        <div class="card">
-            <img src="assets/requiem.jpg">
-            <h3>Resident Evil Requiem</h3>
-            <p>$2690</p>
-            <button id="carrito-btn">Agregar al carrito</button>
-        </div>
-
-        <div class="card">
-            <img src="assets/Yugi.jpeg">
-            <h3>Yu-Gi-Oh! Beyond the Brave Booster pack</h3>
-            <p>$350</p>
-            <button id="carrito-btn">Agregar al carrito</button>
-        </div>
-
-        <div class="card">
-            <img src="assets/Skyline.jpg">
-            <h3>Nissan Skyline LEGO</h3>
-            <p>$2100</p>
-            <button id="carrito-btn">Agregar al carrito</button>
-        </div>
-
-        <div class="card">
-            <img src="assets/rei.jpeg">
-            <h3>Neon Genesis Evangelion 02</h3>
-            <p>$590</p>
-            <button id="carrito-btn">Agregar al carrito</button>
-        </div>
-
-        <div class="card">
-            <img src="assets/doom.jpg">
-            <h3>Joystick Doom: The Dark Ages (edición limitada)</h3>
-            <p>$4500</p>
-            <button id="carrito-btn">Agregar al carrito</button>
-        </div>
-
     </section>
 
     <!-- Pie de página -->
