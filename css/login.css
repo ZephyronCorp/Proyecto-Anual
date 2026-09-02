@@ -1,6 +1,6 @@
 /*
 Autor: Facundo Martino
-Última actualización: 10/07/2026
+Ultima actualizacion: 29/08/2026
 */
 
 /* Reset */
@@ -16,28 +16,106 @@ body{
     background-color: #161618;
     color: white;
 }
+/* Header */
+header {
+    padding: 12px 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161618;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /*Se agregó z-index para que el header esté siempre visible */
+}
+.header-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.logo {
+    height: 30px;
+    position: relative;
+    top: 3px; /*Indica cuánto querés desplazar el elemento desde arriba*/
+}
+.menu{
+    display: flex;
+    gap: 20px;
+}
+.menu a{
+    text-decoration: none;
+    color: #8a8a96;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    font-weight: normal;
+    padding: 10px;
+}
 
+.menu a:hover{
+    color: #f0ede8;
+}
+
+.header-derecha{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.header-derecha img{
+    display: block;
+    background-color: rgb(26, 26, 26);
+    width: 50px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    border: 1px solid #f97316;
+    border-radius: 8px;
+}
+
+.header-derecha img:hover{
+    background-color: #f97316;
+}
+
+.login{
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color .3s ease;
+}
+
+.login:hover{
+    color: #f0ede8;
+}
+
+.register{
+    text-decoration: none;
+    color: #f97316;
+    border: 1px solid #f97316;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition:color .3s ease, background-color .3s ease, border-color .3s ease;
+}
 .pagina-login{
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-/* Tarjeta del login */
 .login-card{
     background-color: #1E1E21;
     border: 1px solid rgba(249,115,22,.12);
     width: 400px;
     padding: 30px;
     border-radius: 8px;
+    box-sizing: border-box;
 }
 
-/* Navegación entre Login y Registro */
 .opciones-login{
     display: flex;
+    width: 300px;
     background-color: #161618;
     margin-bottom: 25px;
+    box-sizing: border-box;
+    border: 1px solid #333;
 }
 
 .opciones-login a{
@@ -114,4 +192,81 @@ body{
 
 .login-card button:hover{
     background-color: #FF8C38;
+}
+/* Footer */
+footer{
+
+    background:#181818;
+
+    text-align:center;
+
+    padding:35px;
+
+    border-top:3px solid #d48a42;
+
+}
+
+footer h3{
+
+    color:#d48a42;
+
+    margin-bottom:15px;
+
+}
+
+footer p{
+
+    margin:8px;
+
+    color:#dcdcdc;
+
+}
+/* Responsive */
+
+/* Tablet */
+@media (max-width: 1024px){
+
+    header{
+        padding: 12px 20px;
+    }
+
+    .menu{
+        gap: 10px;
+    }
+}
+/* Celular */
+@media (max-width: 768px){
+
+    header{
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .header-izquierda{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-derecha{
+        justify-content: center;
+    }
+
+    .menu{
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .login-card{
+        width: 90%;
+        padding: 25px;
+    }
+
+    .opciones-login{
+        width: 90%;
+    }
+    .campo{
+        width: 100%;
+    }
 }

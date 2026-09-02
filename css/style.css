@@ -1,6 +1,6 @@
 ﻿/*
 Autor: Dante La Banca
-Última actualización: 9/07/2026
+Ultima actualizacion: 30/08/2026
 */
 
 /* Reset */
@@ -15,6 +15,7 @@ body{
     font-family: Arial, sans-serif;
     background: #111111;
     color: #f5f5f5;
+    line-height: 1.6;
 }
 
 /* Encabezado */
@@ -26,6 +27,9 @@ header {
     align-items: center;
     background-color: #161618;
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /*Se agregó z-index para que el header esté siempre visible */
 }
 
 .header-izquierda {
@@ -36,6 +40,8 @@ header {
 
 .logo {
     height: 30px;
+    position: relative;
+    top: 3px; /*Indica cuánto querés desplazar el elemento desde arriba*/
 }
 
 .menu{
@@ -60,6 +66,19 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
+}
+.header-derecha img{
+    display: block;
+    background-color: rgb(26, 26, 26);
+    width: 50px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    border: 1px solid #f97316;
+    border-radius: 8px;
+}
+
+.header-derecha img:hover{
+    background-color: #f97316;
 }
 
 .login{
@@ -89,51 +108,120 @@ header {
 /* Banner */
 
 .banner img{
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+}
 
+/*Categorías*/
+.catalogo{
     width:100%;
-
-    height:350px;
-
-    object-fit:cover;
-
-    display:block;
-
+    margin:40px auto;
+    background-color:#242426;
+    padding:30px 0;
 }
 
-/* Quiénes somos */
+.catalogo h2{
+    width:70%;
+    margin:0 auto 25px;
+    color:white;
+    font-size:30px;
+}
 
-.quienes-somos{
+.categorias{
+    width:70%;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:15px;
+}
 
-    width:75%;
-
-    margin:60px auto;
-
+.categoria{
+    border:1px solid #f97316;
+    border-radius:8px;
+    background-color:#0D0D0D;
     text-align:center;
-
+    padding:15px 10px;
 }
 
-.quienes-somos h2{
-
-    color:#d48a42;
-
-    margin-bottom:25px;
-
-    font-size:34px;
-
+.categoria p{
+    color:white;
+    margin:8px 0 0;
+    font-weight:bold;
 }
 
-.quienes-somos p{
-
-    line-height:1.9;
-
-    font-size:18px;
-
-    margin-bottom:20px;
-
-    color:#dddddd;
-
+.categoria img{
+    width:90px;
+    height:90px;
+    object-fit:contain;/*Para que la imagen se ajuste completamente dentro del contenedor*/
 }
 
+
+/* Productos destacados */
+.productos{
+    width:100%;
+    margin:40px auto;
+}
+.productos h2{
+    margin: 40px auto;
+    padding:20px;
+    color:white;
+    margin-bottom:30px;
+    font-size: 30px;
+}
+.productos-destacados{
+    width: 100%;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 35px;
+    justify-items: center;
+}
+.card{
+    background:#1b1b1b;
+    border:1px solid #f97316;
+    width:80%;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.35s;
+}
+.card img{
+    width:100%;
+    height:280px;
+    object-fit:contain;/*Para que la imagen se ajuste completamente dentro del contenedor*/
+    display:block;
+}
+.card h3{
+    color:white;
+    margin:15px;
+}
+.card p{
+    color:#dcdcdc;
+    margin:15px;
+}
+.card .precio{
+    color:#f97316;
+    font-weight: bold;
+}
+/* Enlace dentro de la tarjeta */
+.card a{
+    text-decoration:none;
+    color:white;
+}
+.card button{
+    margin:20px;
+    width:85%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#ff7300;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
 /* Pie de página */
 
 footer{
@@ -163,6 +251,98 @@ footer p{
     color:#dcdcdc;
 
 }
+/*Responsive*/
 
+/* Tablet */
+@media (max-width: 1024px){
+
+    header{
+        padding:12px 20px;
+    }
+
+    .menu{
+        gap:10px;
+    }
+
+    .categorias{
+        width:85%;
+        grid-template-columns:repeat(2, 1fr);
+    }
+
+    .productos-destacados{
+        grid-template-columns:repeat(2, 1fr);
+    }
+
+    .card{
+        width:90%;
+    }
+}
+
+/* Celular */
+@media (max-width: 768px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .header-izquierda{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .header-derecha{
+        justify-content:center;
+    }
+
+    .menu{
+        width:100%;
+        justify-content:center;
+        gap:10px;
+    }
+
+    .banner img{
+        height:250px;
+    }
+
+    .catalogo h2{
+        width:90%;
+        font-size:25px;
+    }
+
+    .categorias{
+        width:90%;
+        grid-template-columns:repeat(2, 1fr);
+        gap:10px;
+    }
+
+    .categoria{
+        padding:10px;
+    }
+
+    .categoria img{
+        width:70px;
+        height:70px;
+    }
+
+    .productos h2{
+        font-size:25px;
+        text-align:center;
+    }
+
+    .productos-destacados{
+        grid-template-columns:1fr;
+        gap:20px;
+    }
+
+    .card{
+        width:90%;
+    }
+
+    .card img{
+        height:250px;
+    }
+}
 
 

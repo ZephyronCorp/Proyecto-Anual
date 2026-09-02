@@ -1,6 +1,6 @@
 /*
 Autor: Franco Pirez
-Última actualización: 8/07/2026
+Ultima actualizacion: 29/08/2026
 */
 
 /* Reset */
@@ -18,6 +18,9 @@ header {
     align-items: center;
     background-color: #161618;
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /*Se agregó z-index para que el header esté siempre visible */
 }
 .header-izquierda {
     display: flex;
@@ -26,6 +29,8 @@ header {
 }
 .logo {
     height: 30px;
+    position: relative;
+    top: 3px; /*Indica cuánto querés desplazar el elemento desde arriba*/
 }
 .menu{
     display: flex;
@@ -48,6 +53,19 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
+}
+.header-derecha img{
+    display: block;
+    background-color: rgb(26, 26, 26);
+    width: 50px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    border: 1px solid #f97316;
+    border-radius: 8px;
+}
+
+.header-derecha img:hover{
+    background-color: #f97316;
 }
 
 .login{
@@ -114,9 +132,9 @@ main{
 }
 .imagenes img{
     border-radius: 12px;
-    margin-left: 30px;
-    width: 400px;
+    width: 100%;
 }
+
 /* Tarjeta sobre el producto, su precio y compra*/
 .info-producto{
     background-color: #1E1E21;
@@ -197,27 +215,22 @@ main{
     align-items: flex-start;
     gap: 50px;
 }
-.productos-relacionados .tarjeta1 h4{
-    text-align: center;
-}
-.productos-relacionados .tarjeta1 img{
-    margin: 20px;
-}
-.productos-relacionados .tarjeta2 h4{
-    text-align: center;
-}
-.productos-relacionados .tarjeta2 img{
-    margin: 20px;
-    padding: 1px;
-    width: 300px;
-    height: 380px
-}
-.productos-relacionados .tarjeta3 h4{
-    text-align: center;
-}
+.productos-relacionados .tarjeta1 img,
+.productos-relacionados .tarjeta2 img,
 .productos-relacionados .tarjeta3 img{
-    width: 300px;
-    margin: 20px;
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    margin: 10px 0;
+    padding: 0;
+}
+
+.productos-relacionados .tarjeta1,
+.productos-relacionados .tarjeta2,
+.productos-relacionados .tarjeta3 h3{
+    color: #F0EDE8;
+    text-align: center;
+
 }
 
 /* Footer */
@@ -251,11 +264,12 @@ footer p{
 
 /*Responsive*/
 
-
 /*Tablet*/
 
 @media (max-width:1024px){
-
+    header{
+        padding: 12px 20px;
+    }
     .producto{
         flex-direction: column;
         align-items: center;
@@ -274,17 +288,31 @@ footer p{
 
     header{
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .header-izquierda{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-derecha{
+        justify-content: center;
     }
 
     .menu{
-        flex-direction: column;
+        width: 100%;
+        justify-content: center;
         align-items: center;
+        gap: 10px;
     }
 
     .producto{
         flex-direction: column;
         align-items: center;
+        gap: 20px;
+        margin: 25px auto;
     }
 
     .info-producto{
@@ -300,5 +328,4 @@ footer p{
         flex-direction: column;
         align-items: center;
     }
-
 }

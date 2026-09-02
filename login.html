@@ -1,6 +1,6 @@
 <!--
 Autor: Facundo Martino
-Última actualización: 10/07/2026
+Ultima actualizacion: 29/08/2026
 -->
 
 <!DOCTYPE html>
@@ -14,16 +14,29 @@ Autor: Facundo Martino
 </head>
 
 <body>
+  <header>
+        <div class="header-izquierda">
+            <a href="index.html"><img src="assets/Logo completo.png" alt="Logo empresa" class="logo"></a>
+
+            <nav class="menu">
+                <a href="Catalogo.html">Catálogo</a>
+            </nav>
+        </div>
+        <div class="header-derecha">
+            <a href="login.html" class="login">Ingresar</a>
+            <a href="register.html" class="register">Registrarse</a>
+            <a href="carrito.html" target="_blank"><img src="assets/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
+        </div>
+    </header>
   <main class="pagina-login">
-    <section class="login-card">
-      
-      <!-- Apartado para elegir si quieres iniciar sesión o registrarte -->
+    <!-- Apartado para elegir si quieres iniciar sesión o registrarte -->
       <div class="opciones-login">
         <a href="login.html" class="activo">Iniciar sesión</a>
         <a href="register.html">Crear cuenta</a>
       </div>
-
+    <section class="login-card">
       <!-- Formulario para iniciar sesión -->
+       
       <h2>Bienvenido de nuevo</h2>
       <div class="campo">
         <label for="email">Correo electrónico</label>
@@ -44,5 +57,21 @@ Autor: Facundo Martino
       <button>Iniciar sesión</button>
     </section>
   </main>
+  <footer>
+        <hr>
+        <h3>Contacto</h3>
+        <p>
+            Correo electrónico: zonajoystick26@gmail.com
+        </p>
+        <p>
+            Teléfono: +598 97 951 885
+        </p>
+        <p>
+            Centro, Montevideo Uruguay
+        </p>
+        <p>
+            &copy; Creado por Zephyron Corp
+        </p>
+    </footer>
 </body>
 </html>
