@@ -158,7 +158,7 @@ main{
     color: #8A8A96;
 }
 
-#comprar-btn{
+#carrito-btn{
     background-color: #F97316;
     color: #161618;
     margin-top: 3%;
@@ -168,7 +168,7 @@ main{
     border-radius: 5px;
 }
 
-#comprar-btn:hover{
+#carrito-btn:hover{
     background-color: #FF8C38;
 }
 

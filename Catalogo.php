@@ -1,7 +1,8 @@
 <!--Autor: Eric Leyes Ultima actualizacion: 02/09/2026-->
 
-
+ 
 <?php
+    //Conectar la base de datos con el catalogo
     require_once 'php/conexion.php';
     $sql = "SELECT * FROM productos";
     $resultado = mysqli_query($conexion, $sql);
@@ -26,7 +27,7 @@
             <a href="index.html"><img src="assets/Logo completo.png" alt="Logo empresa" class="logo"></a>
 
             <nav class="menu">
-                <a href="Catalogo.html">Catálogo</a>
+                <a href="Catalogo.php">Catálogo</a>
             </nav>
         </div>
         <div class="header-derecha">
@@ -44,9 +45,19 @@
 
     <!-- Sección de catálogo -->
     <section class="catalogo">
-        <?php if (mysqli_num_rows($resultado) > 0): ?>
-            <?php while ($producto = mysqli_fetch_assoc($resultado)): ?>
-                <?php $sinStock = $producto['stock'] == 0; ?>
+        <!-- Bucle para mostrar los productos del catálogo -->
+        <?php 
+        // Verificar si hay productos disponibles
+            if (mysqli_num_rows($resultado) > 0): 
+        ?>
+            <?php 
+            // Bucle para mostrar cada producto en una tarjeta
+            while ($producto = mysqli_fetch_assoc($resultado)): 
+            ?>
+                <?php 
+                    // Verificar si el producto está sin stock
+                    $sinStock = $producto['stock'] == 0; 
+                    ?>
                 <div class="card">
                     <div class="imagen-producto"><img src="<?php echo $producto['imagen']; ?>" alt="<?php echo $producto['nombre']; ?>"></div>
                     <h3><?php echo $producto['nombre']; ?></h3>
@@ -65,7 +76,6 @@
             <?php else: ?>
                 <p>No hay productos disponibles en este momento.</p> 
             <?php endif; ?>
-        </div>
     </section>
 
     <!-- Pie de página -->
