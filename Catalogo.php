@@ -33,7 +33,7 @@
         <div class="header-derecha">
             <a href="login.html" class="login">Ingresar</a>
             <a href="register.html" class="register">Registrarse</a>
-            <a href="carrito.html" target="_blank"><img src="assets/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
+            <a href="carrito.html"><img src="assets/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
         </div>
     </header>
 
@@ -77,6 +77,7 @@
                 <p>No hay productos disponibles en este momento.</p> 
             <?php endif; ?>
     </section>
+    <div id="mensaje-flotante" class="mensaje-flotante"></div>
 
     <!-- Pie de página -->
     <footer>
@@ -90,5 +91,7 @@
         <p>Centro, Montevideo Uruguay</p>
         <p>&copy; Creado por Zephyron Corp.</p>
     </footer>
+    <script src="js/storage.js"></script>
+    <script src="js/catalogo.js"></script>
 </body>
 </html>

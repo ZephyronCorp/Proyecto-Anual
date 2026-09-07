@@ -1,0 +1,322 @@
+/*
+Autor:Franco Pirez
+Ultima actualizacion: 30/08/2026
+*/
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Página */
+body{
+    font-family:Arial, sans-serif;
+    background-color:#111111;
+    color:white;
+    line-height:1.6;
+}
+
+/* Encabezado */
+
+header {
+    padding: 12px 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161618;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /*Se agregó z-index para que el header esté siempre visible */
+}
+
+.header-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    height: 30px;
+    position: relative;
+    top: 3px; /*Indica cuánto querés desplazar el elemento desde arriba*/
+}
+
+.menu{
+    display: flex;
+    gap: 20px;
+}
+
+.menu a{
+    text-decoration: none;
+    color: #8a8a96;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    font-weight: normal;
+    padding: 10px;
+}
+
+.menu a:hover{
+    color: #f0ede8;
+}
+
+.header-derecha{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.header-derecha img{
+    display: block;
+    background-color: rgb(26, 26, 26);
+    width: 50px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    border: 1px solid #f97316;
+    border-radius: 8px;
+}
+
+.header-derecha img:hover{
+    background-color: #f97316;
+}
+
+.login{
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color .3s ease;
+}
+
+.login:hover{
+    color: #f0ede8;
+}
+
+.register{
+    text-decoration: none;
+    color: #f97316;
+    border: 1px solid #f97316;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition:color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+.register:hover{
+    background-color: #f97316;
+    color: #161618;
+}
+
+/* Carrito */
+.pagina-carrito{
+    width:85%;
+    margin:40px auto;
+}
+
+.pagina-carrito h1{
+    font-size:32px;
+    margin-bottom:30px;
+}
+
+/* Contenido general */
+.contenido-carrito{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+    align-items:start;
+}
+
+/* Lista de productos */
+.lista-carrito{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+/* Producto */
+.producto-carrito{
+    display:flex;
+    align-items:center;
+    gap:20px;
+
+    background-color:#1b1b1b;
+    border:1px solid #333;
+    border-radius:10px;
+
+    padding:20px;
+}
+
+.producto-carrito img{
+    width:130px;
+    height:130px;
+    object-fit:contain;
+    background-color:#0D0D0D;
+    border-radius:8px;
+}
+
+/* Información del producto */
+.info-carrito{
+    width:100%;
+}
+
+.info-carrito h3{
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.info-carrito p{
+    color:#f97316;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+/* Botón eliminar */
+.info-carrito button{
+    background-color:transparent;
+    color:#f97316;
+    border:1px solid #f97316;
+    padding:8px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.info-carrito button:hover{
+    background-color:#f97316;
+    color:white;
+}
+
+/* Resumen */
+.resumen-carrito{
+    background-color:#1E1E21;
+    border:1px solid rgba(249,115,22,.3);
+    border-radius:10px;
+
+    padding:25px;
+}
+
+.resumen-carrito h2{
+    margin-bottom:20px;
+}
+
+.resumen-carrito p{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+    color:#dcdcdc;
+}
+
+.resumen-carrito span{
+    color:white;
+    font-weight:bold;
+}
+
+/* Botón finalizar */
+#finalizar-compra{
+    width:100%;
+    background-color:#f97316;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+    margin-top:10px;
+}
+
+#finalizar-compra:hover{
+    background-color:#ff8c38;
+}
+
+/* Footer */
+footer{
+    background:#181818;
+    text-align:center;
+    padding:35px;
+    border-top:3px solid #d48a42;
+}
+
+footer h3{
+    color:#d48a42;
+    margin-bottom:15px;
+}
+
+footer p{
+    margin:8px;
+    color:#dcdcdc;
+}
+
+/* Responsive */
+
+/* Tablet */
+@media (max-width:1024px){
+
+    header{
+        padding:12px 20px;
+    }
+
+    .menu{
+        gap:10px;
+    }
+
+    .pagina-carrito{
+        width:90%;
+    }
+
+    .contenido-carrito{
+        grid-template-columns:1fr;
+    }
+
+    .resumen-carrito{
+        width:100%;
+    }
+}
+
+/* Celular */
+@media (max-width:768px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+        padding:20px;
+    }
+
+    .header-izquierda{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .header-derecha{
+        justify-content:center;
+    }
+
+    .menu{
+        width:100%;
+        justify-content:center;
+        gap:10px;
+    }
+
+    .pagina-carrito{
+        width:90%;
+        margin:30px auto;
+    }
+
+    .pagina-carrito h1{
+        font-size:26px;
+        text-align:center;
+    }
+
+    .producto-carrito{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .producto-carrito img{
+        width:120px;
+        height:120px;
+    }
+
+    .info-carrito{
+        width:100%;
+    }
+
+    .resumen-carrito{
+        padding:20px;
+    }
+}

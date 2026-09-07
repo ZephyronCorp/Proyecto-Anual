@@ -189,6 +189,22 @@ header {
     background:#ff9800;
 }
 
+.mensaje-flotante {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f97316;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    z-index: 1001;
+}
+
+.mensaje-flotante-visible {
+    display: block;
+}
+
 /* Enlace dentro de la tarjeta */
 .card a{
     text-decoration:none;
