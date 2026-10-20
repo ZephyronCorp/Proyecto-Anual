@@ -9,30 +9,30 @@ Ultima actualizacion: 29/08/2026
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión</title>
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/Proyecto-Anual/public/css/login.css">
+    <link rel="icon" href="/Proyecto-Anual/public/img/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
   <header>
         <div class="header-izquierda">
-            <a href="index.html"><img src="assets/Logo completo.png" alt="Logo empresa" class="logo"></a>
+            <a href="/Proyecto-Anual/index.php?pagina=home"><img src="/Proyecto-Anual/public/img/Logo completo.png" alt="Logo empresa" class="logo"></a>
 
             <nav class="menu">
-                <a href="Catalogo.php">Catálogo</a>
+                <a href="/Proyecto-Anual/index.php?pagina=catalogo">Catálogo</a>
             </nav>
         </div>
         <div class="header-derecha">
-            <a href="login.html" class="login">Ingresar</a>
-            <a href="register.html" class="register">Registrarse</a>
-            <a href="carrito.html"><img src="assets/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
+            <a href="/Proyecto-Anual/index.php?pagina=login" class="login">Ingresar</a>
+            <a href="/Proyecto-Anual/index.php?pagina=registro" class="register">Registrarse</a>
+            <a href="/Proyecto-Anual/index.php?pagina=carrito"><img src="/Proyecto-Anual/public/img/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
         </div>
     </header>
   <main class="pagina-login">
     <!-- Apartado para elegir si quieres iniciar sesión o registrarte -->
       <div class="opciones-login">
-        <a href="login.html" class="activo">Iniciar sesión</a>
-        <a href="register.html">Crear cuenta</a>
+        <a href="/Proyecto-Anual/index.php?pagina=login" class="activo">Iniciar sesión</a>
+        <a href="/Proyecto-Anual/index.php?pagina=registro">Crear cuenta</a>
       </div>
     <section class="login-card">
       <!-- Formulario para iniciar sesión -->
@@ -76,6 +76,6 @@ Ultima actualizacion: 29/08/2026
             &copy; Creado por Zephyron Corp
         </p>
     </footer>
-    <script src="js/login.js"></script>
+    <script src="/Proyecto-Anual/public/js/login.js"></script>
 </body>
 </html>

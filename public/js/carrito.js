@@ -85,14 +85,31 @@ function vaciarCarrito() {
 // Simula una compra: en el proyecto real acá se haría un fetch()
 // al servidor para registrar el pedido. Por ahora solo confirmamos
 // y vaciamos el carrito.
+
+
 function finalizarCompra() {
-  const carrito = cargarCarrito();
+    const carritoActual = cargarCarrito();
 
-  if (carrito.length === 0) return;
+    if (carritoActual.length === 0) {
+        return;
+    }
 
-  alert("¡Gracias por tu compra! (simulado)");
-  vaciarCarrito();
+    const formularioOculto = document.createElement("form");
+    formularioOculto.method = "POST";
+    formularioOculto.action = "index.php?pagina=confirmar-pedido";
+
+    const campoOculto = document.createElement("input");
+    campoOculto.type = "hidden";
+    campoOculto.name = "carritoJson";
+    campoOculto.value = JSON.stringify(carritoActual);
+
+    formularioOculto.appendChild(campoOculto);
+    document.body.appendChild(formularioOculto);
+
+    formularioOculto.submit();
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
   actualizarContadorCarrito();
