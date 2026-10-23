@@ -1,16 +1,19 @@
 <?php
-//Conexion a la base de datos.
+session_start();
+//Conexion a la base de datos y autenticación.
 require_once __DIR__ . '/config/conexion.php';
+require_once __DIR__ . '/config/auth.php';
 
 //Clases de modelos que vamos a necesitar en distintas páginas.
 require_once __DIR__ . '/models/ProductoModel.php';
 require_once __DIR__ . '/models/PedidoModel.php';
-//require_once __DIR__ . '/models/UsuarioModel.php';
+require_once __DIR__ . '/models/UsuarioModel.php';
 
 //Clases de controllers.
 require_once __DIR__ . '/controllers/ProductoController.php';
 require_once __DIR__ . '/controllers/PedidoController.php';
-//require_once __DIR__ . '/controllers/UsuarioController.php';
+require_once __DIR__ . '/controllers/UsuarioController.php';
+require_once __DIR__ . '/controllers/AdminController.php';
 
 //Pagina solicitada por el usuario.
 $paginaSolicitada = isset($_GET['pagina']) ? $_GET['pagina'] : 'home';
@@ -40,15 +43,34 @@ switch ($paginaSolicitada) {
         break;
 
     case 'registro':
-        require __DIR__ . '/views/register.php';
+        $controladorUsuario = new UsuarioController($conexion);
+        $controladorUsuario->registro();
         break;
 
     case 'login':
-        require __DIR__ . '/views/login.php';
+        $controladorUsuario = new UsuarioController($conexion);
+        $controladorUsuario->login();
         break;
-
+    
+    case 'logout':
+        $controladorUsuario = new UsuarioController($conexion);
+        $controladorUsuario->logout();
+        break;
+        
+    case 'mis-pedidos':
+        $pedidoController = new PedidoController($conexion);
+        $pedidoController->misPedidos();
+        break;
+    
+    case 'admin':
+        (new AdminController($conexion))->panel();
+        break;
+    
+    case 'sin_permiso':
+        require __DIR__ . '/views/sin_permiso.php';
+        break;
     default:
         http_response_code(404);
-        echo "Página no encontrada";
+        echo "<h1>Página no encontrada</h1>";
         break;
 }

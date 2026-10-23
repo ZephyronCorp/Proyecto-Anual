@@ -1,33 +1,7 @@
-<!--
-Autor: Facundo Martino
-Ultima actualizacion: 29/08/2026
--->
+<?php
+$css = "register.css";
+require __DIR__ . '/header.php';?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear cuenta</title>
-    <link rel="stylesheet" href="/Proyecto-Anual/public/css/register.css">
-    <link rel="icon" href="/Proyecto-Anual/public/img/favicon.ico" type="image/x-icon">
-</head>
-
-<body>
-  <header>
-        <div class="header-izquierda">
-            <a href="/Proyecto-Anual/index.php?pagina=home"><img src="/Proyecto-Anual/public/img/Logo completo.png" alt="Logo empresa" class="logo"></a>
-
-            <nav class="menu">
-                <a href="/Proyecto-Anual/index.php?pagina=catalogo">Catálogo</a>
-            </nav>
-        </div>
-        <div class="header-derecha">
-            <a href="/Proyecto-Anual/index.php?pagina=login" class="login">Ingresar</a>
-            <a href="/Proyecto-Anual/index.php?pagina=registro" class="register">Registrarse</a>
-            <a href="/Proyecto-Anual/index.php?pagina=carrito"><img src="/Proyecto-Anual/public/img/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
-        </div>
-    </header>
   <main class="pagina-register">
       <!-- Apartado para elegir si quieres registrarte o iniciar sesión -->
       <div class="opciones-register">
@@ -37,33 +11,47 @@ Ultima actualizacion: 29/08/2026
     <section class="register-card">
       <!-- Formulario para registrarse -->
       <h2>Creá tu cuenta</h2>
-      <form id="formRegister">
+
+      <!-- Muestra los errores de validación si existen -->
+      <?php if (!empty($errores)): ?>
+        <ul class="errores">
+          <?php foreach ($errores as $error): ?>
+            <li><?= escapar($error) ?></li>
+          <?php endforeach; ?>
+        </ul>
+        <?php endif; ?>
+
+        <?php if ($mensajeOk !== ''): ?>
+          <p class="exito"><?= escapar($mensajeOk) ?></p>
+        <?php endif; ?>
+
+      <form id="formRegister" method="POST" action="/Proyecto-Anual/index.php?pagina=registro">
       <div class="nombre-completo">
         <div class="campo">
           <label for="nombre">Nombre</label>
-          <input type="text" id="nombre" placeholder="Juan">
+          <input type="text" id="nombre" placeholder="Juan" name="nombre" value="<?= escapar($nombre) ?>" required>
         </div>
 
         <div class="campo">
           <label for="apellido">Apellido</label>
-          <input type="text" id="apellido" placeholder="Pérez">
+          <input type="text" id="apellido" placeholder="Pérez" name="apellido" value="<?= escapar($apellido) ?>" required>
         </div>
 
       </div>
 
       <div class="campo">
         <label for="email">Correo electrónico</label>
-        <input type="email" id="email" placeholder="tucorreo@email.com">
+        <input type="email" id="email" placeholder="tucorreo@email.com" name="email" value="<?= escapar($email) ?>" required>
       </div>
 
       <div class="campo">
         <label for="contrasena">Contraseña</label>
-        <input type="password" id="contrasena" placeholder="Mínimo 8 caracteres">
+        <input type="password" id="contrasena" placeholder="Mínimo 8 caracteres" name="contrasena" required>
       </div>
 
       <div class="campo">
         <label for="confirmar-contrasena">Confirmá la contraseña</label>
-        <input type="password" id="confirmar-contrasena" placeholder="Repetí tu contraseña">
+        <input type="password" id="confirmar-contrasena" placeholder="Repetí tu contraseña" name="confirmar_contrasena" required>
       </div>
       
       <button type="submit">Registrarse</button>
@@ -71,22 +59,6 @@ Ultima actualizacion: 29/08/2026
       <p id="Mensaje"></p>
     </section>
   </main>
-  <footer>
-        <hr>
-        <h3>Contacto</h3>
-        <p>
-            Correo electrónico: zonajoystick26@gmail.com
-        </p>
-        <p>
-            Teléfono: +598 97 951 885
-        </p>
-        <p>
-            Centro, Montevideo Uruguay
-        </p>
-        <p>
-            &copy; Creado por Zephyron Corp
-        </p>
-  </footer>
-  <script src="/Proyecto-Anual/public/js/register.js"></script>
-</body>
-</html>
+<?php 
+$scriptExtra = 'public/js/register.js';
+require __DIR__ . '/footer.php'; ?>

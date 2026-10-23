@@ -1,36 +1,7 @@
-﻿<!--
-Autor: Dante La Banca
-Ultima actualizacion: 29/08/2026
--->
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zona Joystick</title>
-    <link rel="stylesheet" href="/Proyecto-Anual/public/css/style.css">
-    <link rel="icon" href="/Proyecto-Anual/public/img/favicon.ico" type="image/x-icon">
-</head>
-
-<body>
-    <!-- Header con logo y barra de navegación. -->
-    <header>
-        <div class="header-izquierda">
-            <a href="/Proyecto-Anual/index.php?pagina=home"><img src="/Proyecto-Anual/public/img/Logo completo.png" alt="Logo empresa" class="logo"></a>
-
-            <nav class="menu">
-                <a href="/Proyecto-Anual/index.php?pagina=catalogo">Catálogo</a>
-            </nav>
-        </div>
-        <div class="header-derecha">
-            <a href="/Proyecto-Anual/index.php?pagina=login" class="login">Ingresar</a>
-            <a href="/Proyecto-Anual/index.php?pagina=registro" class="register">Registrarse</a>
-            <a href="/Proyecto-Anual/index.php?pagina=carrito"><img src="/Proyecto-Anual/public/img/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
-        </div>
-    </header>
-
-    <!-- Principal -->
+<!--Autor: Dante La Banca Ultima actualizacion: 29/08/2026-->
+<?php
+$css = "style.css";
+require __DIR__ . '/header.php';?>
     <main>
         <section class="banner">
             <img src="/Proyecto-Anual/public/img/Banner.png" alt="Banner Principal" width="1300" height="200"
@@ -97,25 +68,4 @@ Ultima actualizacion: 29/08/2026
             </div>
         </section>
     </main>
-
-    <!-- Pie de página -->
-
-    <footer>
-        <hr>
-        <h3>Contacto</h3>
-        <p>
-            Correo electrónico: zonajoystick26@gmail.com
-        </p>
-        <p>
-            Teléfono: +598 97 951 885
-        </p>
-        <p>
-            Centro, Montevideo Uruguay
-        </p>
-        <p>
-            &copy; Creado por Zephyron Corp
-        </p>
-    </footer>
-</body>
-
-</html>
+<?php require __DIR__ . '/footer.php'; ?>

@@ -58,6 +58,7 @@ CREATE TABLE Pedido (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     fecha DATETIME NOT NULL,
     estado VARCHAR(50) NOT NULL,
+    total DECIMAL(10,2) NOT NULL DEFAULT 0,
     id_usuario INT NOT NULL,
 
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
@@ -126,12 +127,6 @@ VALUES
 ('Cliente');
 
 -- Insertar usuarios
-INSERT INTO Usuario (nombre, apellido, email, contrasena, id_rol)
-VALUES
-('Juan', 'Perez', 'admin@zonajoystick.com', 'admin123', 1),
-('Lucas', 'Rodriguez', 'empleado@zonajoystick.com', 'empleado123', 2),
-('Sofia', 'Gonzalez', 'cliente@zonajoystick.com', 'cliente123', 3);
-
 INSERT INTO Categoria (nombre, descripcion, sub_categoria)
 VALUES
 ('Videojuegos', 'Juegos para diferentes plataformas', NULL),

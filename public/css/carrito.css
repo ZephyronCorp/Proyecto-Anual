@@ -224,6 +224,34 @@ header {
     background-color:#ff8c38;
 }
 
+/*APARTADO TABLA MIS PEDIDOS*/
+/* Tabla de mis pedidos */
+.tabla-pedidos{
+    width:100%;
+    border-collapse:collapse;
+    background-color:#1b1b1b;
+    margin-top:20px;
+}
+
+.tabla-pedidos th{
+    background-color:#1E1E21;
+    color:#f97316;
+    padding:15px 20px;
+    text-align:left;
+    border:1px solid #333;
+}
+
+.tabla-pedidos td{
+    color:#dcdcdc;
+    padding:20px;
+    text-align:left;
+    border:1px solid #333;
+}
+
+.tabla-pedidos tr:hover{
+    background-color:#252525;
+}
+
 /* Footer */
 footer{
     background:#181818;
@@ -318,5 +346,10 @@ footer p{
 
     .resumen-carrito{
         padding:20px;
+    }
+    .tabla-pedidos th,
+    .tabla-pedidos td{
+        padding:10px 5px;
+        font-size:12px;
     }
 }

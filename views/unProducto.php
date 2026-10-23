@@ -2,36 +2,10 @@
 Autor: Franco Pirez
 Ultima actualizacion: 29/08/2026
 -->
+<?php
+$css = "unProducto.css";
+require __DIR__ . '/header.php';?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/Proyecto-Anual/public/css/unProducto.css">
-    <link rel="icon" href="/Proyecto-Anual/public/img/favicon.ico" type="image/x-icon" sizes="512x512">
-    <title>Astro Bot</title>
-</head>
-<body>
-    <!-- Header con logo y barra de navegación. -->
-    <header>
-        <div class="header-izquierda">
-            <a href="/Proyecto-Anual/index.php?pagina=home"><img src="/Proyecto-Anual/public/img/Logo completo.png" alt="Logo empresa" class="logo"></a>
-
-            <nav class="menu">
-                <a href="/Proyecto-Anual/index.php?pagina=catalogo">Catálogo</a>
-            </nav>
-        </div>
-        <div class="header-derecha">
-            <a href="/Proyecto-Anual/index.php?pagina=login" class="login">Ingresar</a>
-            <a href="/Proyecto-Anual/index.php?pagina=register" class="register">Registrarse</a>
-            <a href="/Proyecto-Anual/index.php?pagina=carrito"><img src="/Proyecto-Anual/public/img/Carrito-De-Compras.png" alt="Carrito de compras" class="carrito"></a>
-        </div>
-    </header>
-
-    <!-- Contenido principal de la página -->
-    
-    <main>
         <nav class="breadcrumb">
 
             <a href="/Proyecto-Anual/index.php?pagina=home">Inicio</a>
@@ -98,21 +72,9 @@ Ultima actualizacion: 29/08/2026
             </article>
         </section>
     </main>
-    <!-- Pie de página -->
-    <footer>
-        <hr>
-        <h3>Contacto</h3>
-
-        <p>Correo electrónico: zonajoystick26@gmail.com</p>
-
-        <p>Teléfono: +589 97 951 885</p>
-
-        <p>Centro, Montevideo Uruguay</p>
-        <p>&copy; Creado por Zephyron Corp.</p>
-    </footer>
 
     <div id="mensaje-flotante" class="mensaje-flotante"></div>
-    <script src="/Proyecto-Anual/public/js/storage.js"></script>
-    <script src="/Proyecto-Anual/public/js/catalogo.js"></script>
-</body>
-</html>
+
+    <?php 
+    $scriptExtra = 'public/js/catalogo.js';
+    require __DIR__ . '/footer.php'; ?>

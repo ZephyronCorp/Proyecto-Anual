@@ -11,7 +11,9 @@ class PedidoController {
     }
 
     public function confirmarPedido() {
+        requerirLogin(); // Aseguramos que el usuario esté logueado antes de confirmar el pedido.
 
+        $idUsuario = usuarioActualId();
         // Comprobamos que el carrito haya sido enviado.
         if (!isset($_POST['carritoJson']) || empty($_POST['carritoJson'])) {
             header('Location: index.php?pagina=carrito');
@@ -25,9 +27,6 @@ class PedidoController {
             exit;
         }
 
-       // Usuario de prueba mientras implementamos el login.
-        $idUsuario = 1;
-
         // Calculamos el total del pedido.
         $totalDelPedido = 0;
         foreach ($carritoRecibido as $itemDelCarrito) {
@@ -35,7 +34,7 @@ class PedidoController {
         }
 
         // Creamos el pedido.
-        $idPedidoCreado = $this->pedidoModel->crearPedido($idUsuario);
+        $idPedidoCreado = $this->pedidoModel->crearPedido($idUsuario, $totalDelPedido);
 
         // Guardamos los productos del pedido.
         foreach ($carritoRecibido as $itemDelCarrito) {
@@ -50,4 +49,16 @@ class PedidoController {
         // Mostramos la confirmación.
         require __DIR__ . '/../views/pedido_confirmado.php';
     }
+
+    public function misPedidos() {
+    
+    requerirLogin(); // Aseguramos que el usuario esté logueado antes de mostrar sus pedidos.
+
+    //
+    $idUsuario = usuarioActualId();
+
+    $pedidos = $this->pedidoModel->listarPorUsuario($idUsuario);
+
+    require __DIR__ . '/../views/misPedidos.php';
+}
 }

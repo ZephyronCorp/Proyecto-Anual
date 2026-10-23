@@ -26,10 +26,10 @@
             <tbody>
                 <?php foreach ($carritoRecibido as $itemDelCarrito): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($itemDelCarrito['nombre']); ?></td>
-                        <td><?php echo $itemDelCarrito['cantidad']; ?></td>
-                        <td>$<?php echo number_format($itemDelCarrito['precio'], 2, ',', '.'); ?></td>
-                        <td>$<?php echo number_format($itemDelCarrito['precio'] * $itemDelCarrito['cantidad'], 2, ',', '.'); ?></td>
+                        <td><?php echo escapar($itemDelCarrito['nombre']); ?></td>
+                        <td><?php echo escapar($itemDelCarrito['cantidad']); ?></td>
+                        <td>$<?php echo escapar($itemDelCarrito['precio']); ?></td>
+                        <td>$<?php echo escapar($itemDelCarrito['precio'] * $itemDelCarrito['cantidad']); ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
