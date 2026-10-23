@@ -119,6 +119,10 @@ CREATE TABLE Descuento_Producto (
 
 
 -- Inserts
+INSERT INTO Usuario (nombre, apellido, email, contrasena, id_rol)
+VALUES
+('Admin', 'Prueba', 'admin@zonajoystick.com', '$2y$10$E4hXxtSE8KHfuOEjoQB35uD14ZhT7lFtwGAmx32SY4GjpqHLLf66G', 1),
+('Cliente', 'Prueba', 'cliente@zonajoystick.com', '$2y$10$3SSH0swOxw5.GTlenC6Fb.5U02FCm1W5oCeXit/hoZmAfngD5cyiy', 3);
 
 INSERT INTO Rol (nombre_rol)
 VALUES
