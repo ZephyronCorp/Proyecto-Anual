@@ -21,7 +21,7 @@ class ProductoController
         $busqueda = trim($_GET['q'] ?? ''); // Elimina espacios en blanco al inicio y al final
         $busqueda = mb_substr($busqueda, 0, 50); // Limitar a 50 caracteres
 
-        $listaDeProductos = $this->productoModel->listarProductos($idCategoriaSeleccionada);
+        $listaDeProductos = $this->productoModel->listarProductos($idCategoriaSeleccionada, $busqueda);
         $listaDeCategorias = $this->productoModel->listarCategorias();
 
         require __DIR__ . '/../views/Catalogo.php';

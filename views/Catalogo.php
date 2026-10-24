@@ -17,9 +17,9 @@ require __DIR__ . '/header.php';?>
         <select name="categoria" id="selectorCategoria">
             <option value="">Todas las categorías</option>
             <?php foreach ($listaDeCategorias as $categoria): ?>
-                <option
+                <option 
                     value="<?php echo (int)$categoria['id_categoria']; ?>"
-                    <?php echo ($idCategoriaSeleccionada == $categoria['id_categoria']) ? 'selected' : ''; ?>
+                    <?php echo ($idCategoriaSeleccionada == $categoria['id_categoria']) ? 'selected' : ''; ?>>
                     <?php echo htmlspecialchars($categoria['nombre']); ?>
                 </option>
             <?php endforeach; ?>

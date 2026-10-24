@@ -9,50 +9,45 @@ class ProductoModel {
     }
 
     // Devuelve todos los productos o filtra por categoría.
-    public function listarProductos($idCategoriaFiltro = null) {
+    public function listarProductos($idCategoria = null, $busqueda = "") {
+        $sql = "SELECT * FROM Producto WHERE 1=1";
+        $tipos = "";
+        $parametros = [];
 
-        $consultaSql = "
-            SELECT
-                Producto.id_producto,
-                Producto.nombre,
-                Producto.descripcion,
-                Producto.precio,
-                Producto.stock,
-                Producto.imagen,
-                Categoria.id_categoria,
-                Categoria.nombre AS nombre_categoria
-            FROM Producto
-            INNER JOIN Categoria
-                ON Producto.id_categoria = Categoria.id_categoria";
+        
+        //filtro por categoría
+        if ($idCategoria !== null && $idCategoria !== "") {
+            $sql .= " AND id_categoria = ?";
+            $tipos .= "i";
+            $parametros[] = (int)$idCategoria;
+        }
+        
+        //filtro por texto
 
-        // Si hay una categoría seleccionada, agregamos el filtro.
-        if (!empty($idCategoriaFiltro)) {
-            $consultaSql .= " WHERE Producto.id_categoria = ?";
+        if($busqueda !==""){
+            $sql .= " AND (nombre LIKE ? OR descripcion LIKE ?)";
+            $tipos .= "ss";
+            $patron = "%" . $this->escaparLike($busqueda) . "%";
+            $parametros[] = $patron;
+            $parametros[] = $patron;
         }
 
-        $consultaSql .= " ORDER BY Producto.nombre ASC";
-        $consultaPreparada = mysqli_prepare($this->conexion, $consultaSql);
+        $sql .= " ORDER BY nombre";
 
-        if (!empty($idCategoriaFiltro)) {
-            mysqli_stmt_bind_param(
-                $consultaPreparada,
-                "i",
-                $idCategoriaFiltro
-            );
+        $stmt = $this->conexion->prepare($sql);
+        if(!empty($parametros)){
+            $stmt->bind_param($tipos, ...$parametros);
         }
-
-        mysqli_stmt_execute($consultaPreparada);
-        $resultado = mysqli_stmt_get_result($consultaPreparada);
-        $listaDeProductos = [];
-
-        while ($filaProducto = mysqli_fetch_assoc($resultado)) {
-            $listaDeProductos[] = $filaProducto;
-        }
-
-        mysqli_stmt_close($consultaPreparada);
-        return $listaDeProductos;
+        $stmt->execute();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        
     }
 
+    private function escaparLike($texto) {
+            return str_replace(['\\', '%', '_'], ['\\\\', '\\%', '\\_'], $texto);
+        }
+        
+        
     // Devuelve un producto específico mediante su ID.
     public function obtenerProductoPorId($idProducto) {
 
