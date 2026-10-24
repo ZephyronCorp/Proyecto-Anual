@@ -35,7 +35,7 @@ require __DIR__ . '/header.php';?>
             <input type="hidden" name="categoria"
             value="<?= escapar($idCategoriaSeleccionada) ?>">
         <?php endif; ?>
-        <label for="q">Buscar productos</label>
+        <label for="q">Buscar productos:</label>
         <input type="text" id="q" name="q" maxlength="50" placeholder="Ej: ..." value="<?= escapar($busqueda) ?>">
         <input type="submit" value="Buscar">
     </form>
