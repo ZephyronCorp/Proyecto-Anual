@@ -40,13 +40,22 @@ require __DIR__ . '/header.php';?>
         <input type="submit" value="Buscar">
     </form>
 
+    <?php if ($busqueda !== ''): ?>
+        <p class="resumen-busqueda">
+        <?= count($listaDeProductos) ?> resultado(s) para
+        "<strong><?= escapar($busqueda) ?></strong>"
+        — <a href="index.php?pagina=catalogo<?= !empty($idCategoriaSeleccionada) ?
+        '&categoria=' . urlencode($idCategoriaSeleccionada) : '' ?>">Limpiar búsqueda</a>
+        </p>
+    <?php endif; ?>
+    <?php if (empty($listaDeProductos)): ?>
+        <p class="sin-resultados">No encontramos productos con esos criterios.</p>
+    <?php endif; ?>
     
     <!-- Sección de catálogo -->
     <section class="catalogo">
             <!-- Verificar si hay productos disponibles -->
             <?php if (empty($listaDeProductos)): ?>
-
-            <p>No hay productos disponibles en este momento.</p>
 
             <?php else: ?>
                 <!-- Mostrar cada producto en una tarjeta -->
