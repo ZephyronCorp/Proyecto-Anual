@@ -66,6 +66,16 @@ header {
     align-items: center;
     gap: 15px;
 }
+
+.header-derecha a{
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color .3s ease;
+}
+.header-derecha a:hover{
+    color: #f0ede8;
+}
+
 .header-derecha img{
     display: block;
     background-color: rgb(26, 26, 26);
@@ -277,6 +287,17 @@ footer p{
 
     header{
         padding:12px 20px;
+        
+    }
+
+    .header-izquierda{
+        gap:20px;
+        font-size:14px;
+    }
+
+    .header-derecha{
+        font-size:14px;
+        gap:10px;
     }
 
     .menu{
@@ -294,6 +315,7 @@ footer p{
     .resumen-carrito{
         width:100%;
     }
+
 }
 
 /* Celular */
@@ -312,6 +334,7 @@ footer p{
 
     .header-derecha{
         justify-content:center;
+        font-size:14px;
     }
 
     .menu{
