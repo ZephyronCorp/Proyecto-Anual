@@ -19,13 +19,25 @@ require __DIR__ . '/header.php';?>
             <?php foreach ($listaDeCategorias as $categoria): ?>
                 <option
                     value="<?php echo (int)$categoria['id_categoria']; ?>"
-                    <?php echo ($idCategoriaSeleccionada == $categoria['id_categoria']) ? 'selected' : ''; ?>>
+                    <?php echo ($idCategoriaSeleccionada == $categoria['id_categoria']) ? 'selected' : ''; ?>
                     <?php echo htmlspecialchars($categoria['nombre']); ?>
                 </option>
             <?php endforeach; ?>
         </select>
 
         <button type="submit" class="boton">Filtrar</button>
+    </form>
+
+    <!-- Buscador de productos -->
+    <form action="index.php" method="GET" class="buscador">
+        <input type="hidden" name="pagina" value="catalogo">
+        <?php if (!empty($idCategoriaSeleccionada)): ?>
+            <input type="hidden" name="categoria"
+            value="<?= escapar($idCategoriaSeleccionada) ?>">
+        <?php endif; ?>
+        <label for="q">Buscar productos</label>
+        <input type="text" id="q" name="q" maxlength="50" placeholder="Ej: ..." value="<?= escapar($busqueda) ?>">
+        <input type="submit" value="Buscar">
     </form>
 
     

@@ -15,9 +15,11 @@ class ProductoController
     // Muestra el catálogo, con filtro opcional por categoría.
     public function mostrarCatalogo()
     {
-        $idCategoriaSeleccionada = isset($_GET['categoria'])
-            ? $_GET['categoria']
-            : null;
+        $idCategoriaSeleccionada = isset($_GET['categoria'])? $_GET['categoria']: null;
+
+        //Texto de busqueda
+        $busqueda = trim($_GET['q'] ?? ''); // Elimina espacios en blanco al inicio y al final
+        $busqueda = mb_substr($busqueda, 0, 50); // Limitar a 50 caracteres
 
         $listaDeProductos = $this->productoModel->listarProductos($idCategoriaSeleccionada);
         $listaDeCategorias = $this->productoModel->listarCategorias();
