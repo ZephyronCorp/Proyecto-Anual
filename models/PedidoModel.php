@@ -51,7 +51,7 @@ class PedidoModel {
 
         $stmt->bind_param("i", $idUsuario);
         $stmt->execute();
-        return $stmt->get_resutl->fetch(MYSQLI_ASSOC);
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
     public function obtenerDetalle($idPedido){
