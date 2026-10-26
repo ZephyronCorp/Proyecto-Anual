@@ -1,0 +1,270 @@
+/* Reset */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+/* Estilos generales */
+body{
+    font-family:Arial, sans-serif;
+    background:white;
+    color:#222;
+    line-height:1.6;
+    max-width:800px;
+    margin:20px auto;
+    padding:0 16px;
+}
+
+/* Header */
+header {
+    padding: 12px 40px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161618;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /*Se agregó z-index para que el header esté siempre visible */
+}
+.header-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.logo {
+    height: 30px;
+    position: relative;
+    top: 3px; /*Indica cuánto querés desplazar el elemento desde arriba*/
+}
+.menu{
+    display: flex;
+    gap: 20px;
+}
+.menu a{
+    text-decoration: none;
+    color: #8a8a96;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    font-weight: normal;
+    padding: 10px;
+}
+
+.menu a:hover{
+    color: #f0ede8;
+}
+
+.header-derecha{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-derecha a{
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color .3s ease;
+}
+.header-derecha a:hover{
+    color: #f0ede8;
+}
+
+.header-derecha img{
+    display: block;
+    background-color: rgb(26, 26, 26);
+    width: 50px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    border: 1px solid #f97316;
+    border-radius: 8px;
+}
+
+.header-derecha img:hover{
+    background-color: #f97316;
+}
+
+.login{
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color .3s ease;
+}
+
+.login:hover{
+    color: #f0ede8;
+}
+
+.register{
+    text-decoration: none;
+    color: #f97316;
+    border: 1px solid #f97316;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition:color .3s ease, background-color .3s ease, border-color .3s ease;
+}
+
+.register:hover{
+    background-color: #f97316;
+    color: #161618;
+}
+
+/* Botón y enlace */
+.barra{
+    margin-bottom:20px;
+}
+
+.barra button{
+    padding:10px 16px;
+    background:#f97316;
+    color:#111;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.barra button:hover{
+    background:#ff9800;
+}
+
+.barra a{
+    display:inline-block;
+    margin:10px;
+    color:#333;
+}
+
+/* Encabezado de la factura */
+.encabezado{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    border-bottom:2px solid #333;
+    padding-bottom:15px;
+}
+
+.encabezado h1{
+    font-size:28px;
+}
+
+/* Cliente y envío */
+.datos{
+    display:flex;
+    justify-content:space-between;
+    gap:25px;
+    margin:25px 0;
+}
+
+.datos div{
+    width:48%;
+    overflow-wrap:break-word;
+}
+
+/* Productos */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    border-bottom:1px solid #ccc;
+    padding:10px;
+    text-align:left;
+    overflow-wrap:break-word;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+.der{
+    text-align:right;
+}
+
+.total{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.pago{margin-top:20px;
+}
+
+.pie{
+    margin-top:40px;
+    font-size:13px;
+    color:#666;
+    text-align:center;
+}
+
+/* Footer */
+footer{
+
+    background:#181818;
+
+    text-align:center;
+
+    padding:35px;
+
+    border-top:3px solid #d48a42;
+
+}
+
+footer h3{
+
+    color:#d48a42;
+
+    margin-bottom:15px;
+
+}
+
+footer p{
+
+    margin:8px;
+
+    color:#dcdcdc;
+
+}
+/* Celulares */
+@media screen and (max-width:768px){
+    .encabezado,
+    .datos{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .encabezado .der{
+        text-align:left;
+    }
+
+    .datos div{
+        width:100%;
+    }
+
+    th,
+    td{
+        padding:6px;
+        font-size:12px;
+    }
+}
+
+/* Tamaño de hoja */
+@page{
+    size:A4;
+    margin:15mm;
+}
+
+/* Impresión y PDF */
+@media print{
+    .no-imprimir{
+        display:none;
+    }
+
+    body{
+        margin:0;
+        padding:0;
+        max-width:none;
+    }
+
+    tr{
+        break-inside:avoid;
+    }
+}

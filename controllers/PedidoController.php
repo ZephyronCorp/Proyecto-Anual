@@ -25,7 +25,7 @@ class PedidoController {
         $this->productoModel = new ProductoModel($conexion);
     }
 
-public function checkout(){
+    public function checkout(){
     requerirLogin();
 
     // 1) Leer los productos y cantidades del carrito.
@@ -80,18 +80,6 @@ public function checkout(){
     require __DIR__ . '/../views/checkout.php';
     }
 
-    public function misPedidos() {
-    
-    requerirLogin(); // Aseguramos que el usuario esté logueado antes de mostrar sus pedidos.
-
-    //
-    $idUsuario = usuarioActualId();
-
-    $pedidos = $this->pedidoModel->listarPorUsuario($idUsuario);
-
-    require __DIR__ . '/../views/misPedidos.php';
-    }
-
     public function pagar(){
         $pedido = $this->obtenerPedidoDelUsuario();
 
@@ -130,6 +118,7 @@ public function checkout(){
 
         require __DIR__ . '/../views/pago.php';
     }
+
     public function resultado() {
         $pedido = $this->obtenerPedidoDelUsuario();
 
@@ -141,6 +130,39 @@ public function checkout(){
         require __DIR__ . '/../views/pago_resultado.php';
     }
 
+    public function misPedidos() {
+    
+    requerirLogin(); // Aseguramos que el usuario esté logueado antes de mostrar sus pedidos.
+
+    //
+    $idUsuario = usuarioActualId();
+
+    $pedidos = $this->pedidoModel->listarPorUsuario($idUsuario);
+
+    require __DIR__ . '/../views/misPedidos.php';
+    }
+
+    public function verPedido(){
+        $pedido = $this->obtenerPedidoDelUsuario();
+        $detalle = $this->pedidoModel->obtenerDetalle($pedido['id_pedido']);
+        require __DIR__ . '/../views/pedido_detalle.php';
+    }
+
+    public function factura(){
+        $pedido = $this->obtenerPedidoDelUsuario();
+
+        //Solo se factura lo que estas pagando
+        if ($pedido['estado'] !== 'pagado') {
+            redirigir('pedido-detalle','&id=' . $pedido['id_pedido']);
+        }
+
+        $detalle = $this->pedidoModel->obtenerDetalle($pedido['id_pedido']);
+        $pago = $this->pagoModel->obtenerAprobado($pedido['id_pedido']);
+        $numeroFactura = str_pad($pedido['id_pedido'], 6, '0', STR_PAD_LEFT); // 000005
+        $cliente = usuarioActualNombre();
+
+        require __DIR__ . '/../views/factura.php';
+    }
     // Lee carritoJson (POST) y devuelve [['id' => 5, 'cantidad' => 2], ...]
     // Si algún dato no es válido, devuelve un arreglo vacío.
     private function leerCarrito() {
@@ -162,6 +184,48 @@ public function checkout(){
             $items[] = ['id' => $id, 'cantidad' => $cantidad];
         }
         return $items;
+    }
+    
+    // Busca cada producto en la base y calcula el total.
+    // Devuelve null si algún producto no existe.
+    private function calcularCarrito($items) {
+        $carrito = [];
+        $total = 0;
+        foreach ($items as $item) {
+            $producto = $this->productoModel->obtenerProductoPorId($item['id']);
+            if (!$producto) {
+                return null;
+            }
+        $precio = (float)$producto['precio']; // el precio sale de la BASE
+        $carrito[] = ['id'=> $item['id'],
+            'nombre' => $producto['nombre'],
+            'cantidad' => $item['cantidad'],
+            'precio' => $precio
+        ];
+        $total += $precio * $item['cantidad'];
+        }
+        return ($total > 0) ? ['carrito' => $carrito, 'total' => $total] : null;
+    }
+
+    // Devuelve la lista de errores del formulario de envío
+    private function validarEnvio($envio) {
+        $errores = [];
+        if (!$this->largoEntre($envio['nombre'], 3, 60)) {
+            $errores[] = 'El nombre debe tener entre 3 y 60 caracteres.';
+        }
+        if (!$this->largoEntre($envio['direccion'], 5, 100)) {
+            $errores[] = 'La dirección debe tener entre 5 y 100 caracteres.';
+        }
+        if (!$this->largoEntre($envio['ciudad'], 2, 50)) {
+            $errores[] = 'La ciudad debe tener entre 2 y 50 caracteres.';
+        }
+        if (!in_array($envio['departamento'], $this->departamentos, true)) {
+            $errores[] = 'Elegí un departamento de la lista.';
+        }
+        if (!$this->largoEntre($envio['telefono'], 8, 12)) {
+            $errores[] = 'El teléfono debe tener entre 8 y 12 dígitos.';
+        }
+    return $errores;
     }
     // Devuelve la lista de errores del formulario de tarjeta.
     private function validarTarjeta($titular, $numero, $vencimiento, $cvv) {
@@ -192,7 +256,17 @@ public function checkout(){
 
         return $errores;
     
-        }   
+    }   
+    // ¿El texto tiene entre $min y $max caracteres?
+    private function largoEntre($texto, $min, $max) {
+        $largo = mb_strlen($texto);
+        return $largo >= $min && $largo <= $max;
+    }
+
+    private function simularPasarela($numeroTarjeta) {
+        $ultimoDigito = (int)substr($numeroTarjeta, -1);
+        return ($ultimoDigito % 2 === 0) ? 'aprobado' : 'rechazado';
+    }
     private function obtenerPedidoDelUsuario(){
         requerirLogin();
 
@@ -206,56 +280,5 @@ public function checkout(){
             exit;
         }
         return $pedido;
-    }
-    // Busca cada producto en la base y calcula el total.
-    // Devuelve null si algún producto no existe.
-    private function calcularCarrito($items) {
-        $carrito = [];
-        $total = 0;
-        foreach ($items as $item) {
-            $producto = $this->productoModel->obtenerProductoPorId($item['id']);
-            if (!$producto) {
-                return null;
-            }
-        $precio = (float)$producto['precio']; // el precio sale de la BASE
-        $carrito[] = ['id'=> $item['id'],
-            'nombre' => $producto['nombre'],
-            'cantidad' => $item['cantidad'],
-            'precio' => $precio
-        ];
-        $total += $precio * $item['cantidad'];
-        }
-        return ($total > 0) ? ['carrito' => $carrito, 'total' => $total] : null;
-    }
-        // ¿El texto tiene entre $min y $max caracteres?
-    private function largoEntre($texto, $min, $max) {
-        $largo = mb_strlen($texto);
-        return $largo >= $min && $largo <= $max;
-    }
-
-    // Devuelve la lista de errores del formulario de envío
-    private function validarEnvio($envio) {
-        $errores = [];
-        if (!$this->largoEntre($envio['nombre'], 3, 60)) {
-            $errores[] = 'El nombre debe tener entre 3 y 60 caracteres.';
-        }
-        if (!$this->largoEntre($envio['direccion'], 5, 100)) {
-            $errores[] = 'La dirección debe tener entre 5 y 100 caracteres.';
-        }
-        if (!$this->largoEntre($envio['ciudad'], 2, 50)) {
-            $errores[] = 'La ciudad debe tener entre 2 y 50 caracteres.';
-        }
-        if (!in_array($envio['departamento'], $this->departamentos, true)) {
-            $errores[] = 'Elegí un departamento de la lista.';
-        }
-        if (!$this->largoEntre($envio['telefono'], 8, 12)) {
-            $errores[] = 'El teléfono debe tener entre 8 y 12 dígitos.';
-        }
-    return $errores;
-    }
-
-    private function simularPasarela($numeroTarjeta) {
-        $ultimoDigito = (int)substr($numeroTarjeta, -1);
-        return ($ultimoDigito % 2 === 0) ? 'aprobado' : 'rechazado';
     }
 }

@@ -19,6 +19,10 @@ require __DIR__ . '/header.php';?>
     </p>
 
     <p>
+        <a href="index.php?pagina=factura&id=<?= (int)$pedido['id_pedido'] ?>">Ver y descargar factura</a>
+    </p>
+
+    <p>
         <a href="index.php?pagina=catalogo">Seguir comprando</a>
     </p>
 <?php else: ?>

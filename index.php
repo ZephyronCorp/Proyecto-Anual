@@ -60,6 +60,11 @@ switch ($paginaSolicitada) {
         $pedidoController = new PedidoController($conexion);
         $pedidoController->misPedidos();
         break;
+
+    case 'pedido-detalle':
+        $pedidoController = new PedidoController($conexion);
+        $pedidoController->verPedido();
+        break;
     
     case 'admin':
         (new AdminController($conexion))->panel();
@@ -71,6 +76,10 @@ switch ($paginaSolicitada) {
     
     case 'pago_resultado':
         (new PedidoController($conexion))->resultado();
+        break;
+    
+    case 'factura':
+        (new PedidoController($conexion)) -> factura();
         break;
     
     case 'sin_permiso':
