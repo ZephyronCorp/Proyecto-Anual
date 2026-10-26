@@ -65,6 +65,14 @@ switch ($paginaSolicitada) {
         (new AdminController($conexion))->panel();
         break;
     
+    case 'pago':
+        (new PedidoController($conexion)) -> pagar();
+        break;
+    
+    case 'pago_resultado':
+        (new PedidoController($conexion))->resultado();
+        break;
+    
     case 'sin_permiso':
         require __DIR__ . '/views/sin_permiso.php';
         break;

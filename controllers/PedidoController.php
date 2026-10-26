@@ -78,7 +78,7 @@ public function checkout(){
     }
 
     require __DIR__ . '/../views/checkout.php';
-}
+    }
 
     public function misPedidos() {
     
@@ -90,7 +90,56 @@ public function checkout(){
     $pedidos = $this->pedidoModel->listarPorUsuario($idUsuario);
 
     require __DIR__ . '/../views/misPedidos.php';
-}
+    }
+
+    public function pagar(){
+        $pedido = $this->obtenerPedidoDelUsuario();
+
+        // Si ya está pagado, no tiene sentido volver a cobrar.
+        if ($pedido['estado'] === 'pagado') {
+            redirigir('pago_resultado', '&id=' . $pedido['id_pedido']);
+        }
+
+        $errores = [];
+        $titular = '';
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $titular = trim($_POST['titular'] ?? '');
+            $numero = preg_replace('/\D/', '', $_POST['numero'] ?? '');
+            $vencimiento = trim($_POST['vencimiento'] ?? '');
+            $cvv = $_POST['cvv'] ?? '';
+
+            $errores = $this->validarTarjeta($titular, $numero, $vencimiento, $cvv);
+
+            if (empty($errores)) {
+                $resultado = $this->simularPasarela($numero);
+
+                $ok = $this->pagoModel->registrarIntento(
+                    $pedido['id_pedido'],
+                    $pedido['total'], 
+                    substr($numero, -4),
+                    $resultado
+                );
+                
+                if($ok){
+                    redirigir('pago_resultado', '&id=' . $pedido['id_pedido']);
+                }
+                $errores[] = 'Ocurrió un problema al procesar el pago. Intentá de nuevo.';
+            }
+        }
+
+        require __DIR__ . '/../views/pago.php';
+    }
+    public function resultado() {
+        $pedido = $this->obtenerPedidoDelUsuario();
+
+        // Todavía no se intentó pagar: lo mandamos a pagar.
+        if ($pedido['estado'] === 'pendiente') {
+            redirigir('pago', '&id=' . $pedido['id_pedido']);
+        }
+
+        require __DIR__ . '/../views/pago_resultado.php';
+    }
 
     // Lee carritoJson (POST) y devuelve [['id' => 5, 'cantidad' => 2], ...]
     // Si algún dato no es válido, devuelve un arreglo vacío.
@@ -114,7 +163,50 @@ public function checkout(){
         }
         return $items;
     }
+    // Devuelve la lista de errores del formulario de tarjeta.
+    private function validarTarjeta($titular, $numero, $vencimiento, $cvv) {
+        $errores = [];
 
+        if (!$this->largoEntre($titular, 3, 60)) {
+            $errores[] = 'El nombre del titular debe tener entre 3 y 60 caracteres.';
+        }
+
+        if (strlen($numero) !== 16) {
+            $errores[] = 'El número de tarjeta debe tener 16 dígitos.';
+        }
+
+        if (!preg_match('/^(0[1-9]|1[0-2])\/\d{2}$/', $vencimiento)) {
+            $errores[] = 'El vencimiento debe tener el formato MM/AA.';
+        } else {
+            $vence = DateTime::createFromFormat('!m/y', $vencimiento);
+            $vence->modify('last day of this month')->setTime(23, 59, 59);
+
+            if ($vence < new DateTime()) {
+                $errores[] = 'La tarjeta está vencida.';
+            }
+        }
+
+        if (!preg_match('/^\d{3}$/', $cvv)) {
+            $errores[] = 'El código de seguridad debe tener 3 dígitos.';
+        }
+
+        return $errores;
+    
+        }   
+    private function obtenerPedidoDelUsuario(){
+        requerirLogin();
+
+        $idPedido = (int)($_GET['id'] ?? 0);
+        $pedido = $this ->pedidoModel->obtenerPorId($idPedido,usuarioActualId());
+
+        if(!$pedido){
+            //Mismo mensaje si no existe o si es de otro
+            http_response_code(403);
+            require __DIR__ . '/../views/sin_permiso.php';
+            exit;
+        }
+        return $pedido;
+    }
     // Busca cada producto en la base y calcula el total.
     // Devuelve null si algún producto no existe.
     private function calcularCarrito($items) {
@@ -160,5 +252,10 @@ public function checkout(){
             $errores[] = 'El teléfono debe tener entre 8 y 12 dígitos.';
         }
     return $errores;
+    }
+
+    private function simularPasarela($numeroTarjeta) {
+        $ultimoDigito = (int)substr($numeroTarjeta, -1);
+        return ($ultimoDigito % 2 === 0) ? 'aprobado' : 'rechazado';
     }
 }
