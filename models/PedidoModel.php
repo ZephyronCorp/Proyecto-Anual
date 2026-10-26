@@ -35,7 +35,7 @@ class PedidoModel {
 
     public function obtenerPorId($idPedido, $idUsuario){
         $stmt = $this->conexion->prepare(
-            "SELECT * FROM pedidos WHERE id = ? AND id_usuario = ?"
+            "SELECT * FROM pedido WHERE id_pedido = ? AND id_usuario = ?"
         );
         $stmt->bind_param("ii", $idPedido, $idUsuario);
         $stmt->execute();
@@ -68,7 +68,7 @@ class PedidoModel {
     }    
 
     public function cambiarEstado($idPedido, $estado){
-        $stmt = $this->conexion->prepare("UPDATE pedido SET estado = ? WHERE id = ?");
+        $stmt = $this->conexion->prepare("UPDATE pedido SET estado = ? WHERE id_pedido = ?");
         $stmt -> bind_param("si", $estado, $idPedido);
         if(!$stmt->execute()){
             throw new Exception("No se puedo actualizar el pedido.");

@@ -37,9 +37,8 @@ switch ($paginaSolicitada) {
         require __DIR__ . '/views/Carrito.php';
         break;
 
-    case 'confirmar-pedido':
-        $pedidoController = new PedidoController($conexion);
-        $pedidoController->confirmarPedido();
+    case 'checkout':
+        (new PedidoController($conexion)) -> checkout();
         break;
 
     case 'registro':

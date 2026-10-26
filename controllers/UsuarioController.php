@@ -77,7 +77,7 @@ class UsuarioController
 
                 if($usuario && password_verify($contrasena, $usuario['contrasena'])){
                     iniciarSesionUsuario($usuario);
-                    if (isset($usuario['rol']) && $usuario['rol'] === 1) {
+                    if (isset($usuario['id_rol']) && $usuario['id_rol'] === 1) {
                         header("Location: index.php?pagina=admin");
                     } else {
                         header("Location: index.php?pagina=home");

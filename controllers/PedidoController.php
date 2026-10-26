@@ -1,54 +1,84 @@
-
 <?php
+
+require_once __DIR__ . '/../models/PagoModel.php';
+require_once __DIR__ . '/../models/PedidoModel.php';
+require_once __DIR__ . '/../models/ProductoModel.php';
 
 class PedidoController {
     private $conexion;
     private $pedidoModel;
+    private $pagoModel;
+    private $productoModel;
+
+    private $departamentos = 
+        [
+        'Artigas', 'Canelones', 'Cerro Largo', 'Colonia', 'Durazno', 'Flores',
+        'Florida', 'Lavalleja', 'Maldonado', 'Montevideo', 'Paysandú',
+        'Río Negro', 'Rivera', 'Rocha', 'Salto', 'San José', 'Soriano',
+        'Tacuarembó', 'Treinta y Tres'
+        ];
 
     public function __construct($conexion) {
         $this->conexion = $conexion;
         $this->pedidoModel = new PedidoModel($conexion);
+        $this->pagoModel = new PagoModel($conexion);
+        $this->productoModel = new ProductoModel($conexion);
     }
 
-    public function confirmarPedido() {
-        requerirLogin(); // Aseguramos que el usuario esté logueado antes de confirmar el pedido.
+public function checkout(){
+    requerirLogin();
 
-        $idUsuario = usuarioActualId();
-        // Comprobamos que el carrito haya sido enviado.
-        if (!isset($_POST['carritoJson']) || empty($_POST['carritoJson'])) {
-            header('Location: index.php?pagina=carrito');
-            exit;
-        }
+    // 1) Leer los productos y cantidades del carrito.
+    $items = $this->leerCarrito();
+    if (empty($items)) {
+        redirigir('carrito');
+    }
 
-        $carritoRecibido = json_decode($_POST['carritoJson'], true);
+    // 2) Obtener precios y total desde la base de datos.
+    $datos = $this->calcularCarrito($items);
+    if ($datos === null) {
+        redirigir('carrito');
+    }
+    $carrito = $datos['carrito'];
+    $total = $datos['total'];
 
-        if (empty($carritoRecibido)) {
-            header('Location: index.php?pagina=carrito');
-            exit;
-        }
+    // 3) Variables que usa la vista.
+    $departamentos = $this->departamentos;
+    $carritoJson = json_encode($items);
+    $errores = [];
+    $envio = [
+        'nombre' => '', 'direccion' => '', 'ciudad' => '',
+        'departamento' => '', 'telefono' => ''
+    ];
 
-        // Calculamos el total del pedido.
-        $totalDelPedido = 0;
-        foreach ($carritoRecibido as $itemDelCarrito) {
-            $totalDelPedido += $itemDelCarrito['precio'] * $itemDelCarrito['cantidad'];
-        }
+    // 4) ¿Enviaron el formulario de dirección?
+    if (isset($_POST['confirmar'])) {
+        $envio = [
+            'nombre' => trim($_POST['nombre'] ?? ''),
+            'direccion' => trim($_POST['direccion'] ?? ''),
+            'ciudad' => trim($_POST['ciudad'] ?? ''),
+            'departamento' => trim($_POST['departamento'] ?? ''),
+            'telefono' => preg_replace('/\D/', '', $_POST['telefono'] ?? '')
+        ];
 
-        // Creamos el pedido.
-        $idPedidoCreado = $this->pedidoModel->crearPedido($idUsuario, $totalDelPedido);
+        $errores = $this->validarEnvio($envio);
 
-        // Guardamos los productos del pedido.
-        foreach ($carritoRecibido as $itemDelCarrito) {
-            $this->pedidoModel->agregarDetallePedido(
-                $idPedidoCreado,
-                $itemDelCarrito['id'],
-                $itemDelCarrito['cantidad'],
-                $itemDelCarrito['precio']
+        // 5) Crear el pedido si no hay errores.
+        if (empty($errores)) {
+            $idPedido = $this->pedidoModel->crearPedidoCompleto(
+                usuarioActualId(), $total, $envio, $carrito
             );
-        }
 
-        // Mostramos la confirmación.
-        require __DIR__ . '/../views/pedido_confirmado.php';
+            if ($idPedido) {
+                redirigir('pago', '&id=' . (int)$idPedido);
+            }
+
+            $errores[] = 'No pudimos crear el pedido. Intentá de nuevo.';
+        }
     }
+
+    require __DIR__ . '/../views/checkout.php';
+}
 
     public function misPedidos() {
     
@@ -61,4 +91,74 @@ class PedidoController {
 
     require __DIR__ . '/../views/misPedidos.php';
 }
+
+    // Lee carritoJson (POST) y devuelve [['id' => 5, 'cantidad' => 2], ...]
+    // Si algún dato no es válido, devuelve un arreglo vacío.
+    private function leerCarrito() {
+        $json = $_POST['carritoJson'] ?? '';
+        if (!is_string($json)) {
+            return [];
+        }
+        $lista = json_decode($json, true);
+        if (!is_array($lista)) {
+            return [];
+        }
+        $items = [];
+        foreach ($lista as $item) {
+            $id = filter_var($item['id'] ?? null, FILTER_VALIDATE_INT);
+            $cantidad = filter_var($item['cantidad'] ?? null, FILTER_VALIDATE_INT);
+            if ($id === false || $id < 1 || $cantidad === false || $cantidad < 1) {
+                return []; // un solo dato inválido invalida todo el carrito
+            }
+            $items[] = ['id' => $id, 'cantidad' => $cantidad];
+        }
+        return $items;
+    }
+
+    // Busca cada producto en la base y calcula el total.
+    // Devuelve null si algún producto no existe.
+    private function calcularCarrito($items) {
+        $carrito = [];
+        $total = 0;
+        foreach ($items as $item) {
+            $producto = $this->productoModel->obtenerProductoPorId($item['id']);
+            if (!$producto) {
+                return null;
+            }
+        $precio = (float)$producto['precio']; // el precio sale de la BASE
+        $carrito[] = ['id'=> $item['id'],
+            'nombre' => $producto['nombre'],
+            'cantidad' => $item['cantidad'],
+            'precio' => $precio
+        ];
+        $total += $precio * $item['cantidad'];
+        }
+        return ($total > 0) ? ['carrito' => $carrito, 'total' => $total] : null;
+    }
+        // ¿El texto tiene entre $min y $max caracteres?
+    private function largoEntre($texto, $min, $max) {
+        $largo = mb_strlen($texto);
+        return $largo >= $min && $largo <= $max;
+    }
+
+    // Devuelve la lista de errores del formulario de envío
+    private function validarEnvio($envio) {
+        $errores = [];
+        if (!$this->largoEntre($envio['nombre'], 3, 60)) {
+            $errores[] = 'El nombre debe tener entre 3 y 60 caracteres.';
+        }
+        if (!$this->largoEntre($envio['direccion'], 5, 100)) {
+            $errores[] = 'La dirección debe tener entre 5 y 100 caracteres.';
+        }
+        if (!$this->largoEntre($envio['ciudad'], 2, 50)) {
+            $errores[] = 'La ciudad debe tener entre 2 y 50 caracteres.';
+        }
+        if (!in_array($envio['departamento'], $this->departamentos, true)) {
+            $errores[] = 'Elegí un departamento de la lista.';
+        }
+        if (!$this->largoEntre($envio['telefono'], 8, 12)) {
+            $errores[] = 'El teléfono debe tener entre 8 y 12 dígitos.';
+        }
+    return $errores;
+    }
 }

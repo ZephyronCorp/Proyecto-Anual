@@ -7,8 +7,8 @@ function escapar($texto){
     return htmlspecialchars((string)$texto, ENT_QUOTES, 'UTF-8');
 }
 
-function redirigir($pagina){
-    header("Location: index.php?pagina=" . $pagina);
+function redirigir($pagina, $extra = ''){
+    header("Location: index.php?pagina=" . $pagina . $extra);
     exit;
 }
 

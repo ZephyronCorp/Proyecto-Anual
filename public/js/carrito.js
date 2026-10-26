@@ -89,19 +89,26 @@ function vaciarCarrito() {
 
 function finalizarCompra() {
     const carritoActual = cargarCarrito();
-
+    // No continuar si el carrito está vacío.
     if (carritoActual.length === 0) {
         return;
     }
-
+    // Crear el formulario que enviará el carrito a PHP.
     const formularioOculto = document.createElement("form");
     formularioOculto.method = "POST";
-    formularioOculto.action = "index.php?pagina=confirmar-pedido";
+    formularioOculto.action = "index.php?pagina=checkout";
 
+    // Enviar solo los identificadores y las cantidades.
     const campoOculto = document.createElement("input");
     campoOculto.type = "hidden";
     campoOculto.name = "carritoJson";
-    campoOculto.value = JSON.stringify(carritoActual);
+    campoOculto.value = JSON.stringify(carritoActual.map(function(item){
+      return{
+        id: item.id,
+        cantidad: item.cantidad
+      };
+    })
+  );
 
     formularioOculto.appendChild(campoOculto);
     document.body.appendChild(formularioOculto);
