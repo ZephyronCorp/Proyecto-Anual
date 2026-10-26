@@ -14,6 +14,7 @@ require_once __DIR__ . '/controllers/ProductoController.php';
 require_once __DIR__ . '/controllers/PedidoController.php';
 require_once __DIR__ . '/controllers/UsuarioController.php';
 require_once __DIR__ . '/controllers/AdminController.php';
+require_once __DIR__ . '/controllers/AdminProductoController.php';
 
 //Pagina solicitada por el usuario.
 $paginaSolicitada = isset($_GET['pagina']) ? $_GET['pagina'] : 'home';
@@ -80,6 +81,19 @@ switch ($paginaSolicitada) {
     
     case 'factura':
         (new PedidoController($conexion)) -> factura();
+        break;
+    
+    case 'admin_productos':
+        (new AdminProductoController($conexion)) -> listar();
+        break;
+    case 'admin_producto_crear':
+        (new AdminProductoController($conexion)) -> crear();
+        break;
+    case 'admin_producto_editar':
+        (new AdminProductoController($conexion)) -> editar();
+        break;
+    case 'admin_producto_estado':
+        (new AdminProductoController($conexion)) -> cambiarEstado();
         break;
     
     case 'sin_permiso':
