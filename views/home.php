@@ -11,19 +11,19 @@ require __DIR__ . '/header.php';?>
             <h2>Categorías</h2>
             <div class="categorias">
                 <div class="categoria">
-                    <a href="/Proyecto-Anual/index.php?pagina=catalogo#figuras"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Figuras.png" alt="Figuras"></a>
+                    <a href="/Proyecto-Anual/index.php?pagina=catalogo&categoria=2"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Figuras.png" alt="Figuras"></a>
                     <p>Figuras</p>
                 </div>
                 <div class="categoria">
-                    <a href="/Proyecto-Anual/index.php?pagina=catalogo#juegos"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Videojuegos.png" alt="Juegos"></a>
+                    <a href="/Proyecto-Anual/index.php?pagina=catalogo&categoria=1"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Videojuegos.png" alt="Juegos"></a>
                     <p>Videojuegos</p>
                 </div>
                 <div class="categoria">
-                    <a href="/Proyecto-Anual/index.php?pagina=catalogo#indumentaria"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Indumentaria.png" alt="Indumentaria"></a>
+                    <a href="/Proyecto-Anual/index.php?pagina=catalogo&categoria=3"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Indumentaria.png" alt="Indumentaria"></a>
                     <p>Indumentaria</p>
                 </div>
                 <div class="categoria">
-                    <a href="/Proyecto-Anual/index.php?pagina=catalogo#cartas-tcg"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Tcg.png" alt="Cartas TCG"></a>
+                    <a href="/Proyecto-Anual/index.php?pagina=catalogo&categoria=4"><img src="/Proyecto-Anual/public/img/Logo-Catalogo-Tcg.png" alt="Cartas TCG"></a>
                     <p>Cartas TCG</p>
                 </div>
             </div>
