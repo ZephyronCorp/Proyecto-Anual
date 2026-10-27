@@ -99,6 +99,9 @@ switch ($paginaSolicitada) {
     case 'admin_usuarios':
         (new AdminUsuarioController($conexion))->listar();
         break;
+    case 'admin_usuario_rol':
+        (new AdminUsuarioController($conexion))->cambiarRol();
+        break;
     
     case 'sin_permiso':
         require __DIR__ . '/views/sin_permiso.php';

@@ -73,7 +73,25 @@ require __DIR__ . '/../header.php';
                             <?php if ($esMiCuenta): ?>
                                 <em>No disponible para tu propia cuenta</em>
                             <?php else: ?>
-                                <!-- Las acciones se agregan en las etapas 3 y 4. -->
+                                <form action="index.php?pagina=admin_usuario_rol&id=<?= (int)$u['id_usuario'] ?>"
+                                    method="POST" class="en-linea">
+
+                                    <label for="rol-<?= (int)$u['id_usuario'] ?>" class="solo-lectores">
+                                        Rol
+                                    </label>
+
+                                    <select id="rol-<?= (int)$u['id_usuario'] ?>" name="id_rol">
+                                        <?php foreach ($roles as $r): ?>
+                                            <option value="<?= (int)$r ?>" <?= ((int)$u['id_rol'] === (int)$r) ? 'selected' : '' ?>>
+                                                <?= ((int)$r === 1) ? 'Administrador' : 'Cliente' ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+
+                                    <button type="submit" onclick="return confirm('¿Cambiar el rol de este usuario?');">
+                                        Cambiar rol
+                                    </button>
+                                </form>
                             <?php endif; ?>
                         </td>
                     </tr>
