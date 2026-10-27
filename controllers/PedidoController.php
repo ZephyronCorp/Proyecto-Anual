@@ -196,6 +196,9 @@ class PedidoController {
             if (!$producto) {
                 return null;
             }
+            if($item['cantidad'] > (int)$producto['stock']){
+                return null;
+            }
         $precio = (float)$producto['precio']; // el precio sale de la BASE
         $carrito[] = ['id'=> $item['id'],
             'nombre' => $producto['nombre'],

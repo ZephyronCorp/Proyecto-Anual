@@ -85,6 +85,7 @@ require __DIR__ . '/header.php';?>
                             $<?php echo number_format($producto['precio'], 0, ',', '.'); ?>
                         </p>
 
+                        <?php if ((int) $producto['stock'] > 0): ?>
                         <button
                             id="carrito-btn"
                             data-id="<?php echo $producto['id_producto']; ?>"
@@ -94,7 +95,9 @@ require __DIR__ . '/header.php';?>
                         >
                             Agregar al carrito
                         </button>
-
+                        <?php else: ?>
+                            <span class = "stock stock-agotado">Sin stock|</span>
+                        <?php endif; ?>
                     </div>
 
 

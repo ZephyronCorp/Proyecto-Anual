@@ -233,4 +233,14 @@ class ProductoModel {
 
         return $stmt->execute();
     }
+
+    public function descontarStock($idProducto, $cantidad){
+        $stmt = $this->conexion->prepare(
+            "UPDATE producto SET stock = stock - ? WHERE id_producto = ? AND stock >= ?"
+        );
+
+        $stmt->bind_param("iii", $cantidad, $idProducto, $cantidad);
+        $stmt -> execute();
+        return $stmt -> affected_rows === 1;
+    }
 }

@@ -27,7 +27,7 @@ require __DIR__ . '/../header.php';
 
         <label for="descripcion">Descripción</label>
         <textarea class="campo-producto" id="descripcion" name="descripcion" rows="4"
-            maxlength="500"><?= escapar($producto['descripcion']) ?></textarea>
+            maxlength="3000"><?= escapar($producto['descripcion']) ?></textarea>
 
         <label for="id_categoria">Categoría</label>
         <select class="campo-producto" id="id_categoria" name="id_categoria" required>

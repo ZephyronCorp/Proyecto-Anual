@@ -198,8 +198,8 @@ class AdminProductoController {
             $errores[] = 'El nombre debe tener entre 2 y 100 caracteres.';
         }
 
-        if (mb_strlen($p['descripcion']) > 500) {
-            $errores[] = 'La descripción no puede superar los 500 caracteres.';
+        if (mb_strlen($p['descripcion']) > 3000) {
+            $errores[] = 'La descripción no puede superar los 3000 caracteres.';
         }
 
         $precio = filter_var($p['precio'], FILTER_VALIDATE_FLOAT);

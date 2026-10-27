@@ -1,11 +1,13 @@
 <?php
+require_once __DIR__ . '/ProductoModel.php';
 
 class PedidoModel {
     private $conexion;
-
+    private $productoModel;
     // Constructor: recibe la conexión a MySQL.
     public function __construct($conexion) {
         $this->conexion = $conexion;
+        $this -> productoModel = new ProductoModel($conexion);
     }
 
     // Crea un nuevo pedido en la base de datos y devuelve el ID del pedido creado.
@@ -84,6 +86,10 @@ class PedidoModel {
                 $item['id'],
                 $item['cantidad'],
                 $item['precio']); 
+            
+                if (!$this-> productoModel -> descontarStock($item['id'], $item['cantidad'])) {
+                throw new Exception("Stock insuficiente para el producto" . $item['id']);
+                }
             }
             $this->conexion->commit();
             return $idPedido;

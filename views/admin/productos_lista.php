@@ -16,7 +16,7 @@ $etiquetas = [
     <p>
         <a href="index.php?pagina=admin">Volver al panel</a>
         |
-        <a href="index.php?pagina=admin_producto_crear">+ Nuevo producto</a>
+        <a href="index.php?pagina=admin_producto_crear">Nuevo producto</a>
     </p>
 
     <?php if ($aviso !== ''): ?>

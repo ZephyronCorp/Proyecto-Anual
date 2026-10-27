@@ -32,6 +32,7 @@ require __DIR__ . '/header.php';?>
                 </div>
 
                 <div>
+                    <?php if ((int) $producto['stock'] > 0): ?>
                     <button
                         id="carrito-btn"
                         data-id="<?php echo $producto['id_producto']; ?>"
@@ -40,6 +41,9 @@ require __DIR__ . '/header.php';?>
                         <?php echo ($producto['stock'] <= 0) ? 'disabled' : ''; ?>>
                         Agregar al carrito
                     </button>
+                    <?php else :?>
+                        <span class = "stock stock-agotado">Sin stock</span>
+                    <?php endif; ?>
                 </div>
             </div>
 
