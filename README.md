@@ -9,3 +9,5 @@
 ### Cliente
 - Correo: cliente@zonajoystick.com
 - Contraseña: prueba123
+
+#### Umbral de stock bajo es de 5 productos.
