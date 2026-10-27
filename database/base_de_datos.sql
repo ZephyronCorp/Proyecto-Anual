@@ -19,6 +19,10 @@ CREATE TABLE Usuario (
 
     FOREIGN KEY (id_rol) REFERENCES Rol(id_rol)
 );
+-- Agregar columna activo en la tabla usuario
+ALTER TABLE usuario
+ADD COLUMN activo TINYINT(1) NOT NULL DEFAULT 1;
+ADD COLUMN fecha_registro DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
 
 -- Tabla Direccion
 CREATE TABLE Direccion (
@@ -68,7 +72,8 @@ CREATE TABLE Pedido (
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
--- Tabla Pago: un pedido puede tener varios intentos de pago.
+-- Tabla Pago
+-- Cada registro representa un intento de pago.
 CREATE TABLE Pago (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_pedido INT NOT NULL,
@@ -91,12 +96,14 @@ CREATE TABLE Categoria (
 -- Tabla Producto
 CREATE TABLE Producto (
     id_producto INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(150) NOT NULL,
+    nombre VARCHAR(200) NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
     descripcion TEXT,
-    stock INT NOT NULL,
+    stock INT UNSIGNED NOT NULL DEFAULT 0,
+    stock_minimo INT NOT NULL DEFAULT 5,
+    imagen VARCHAR(500) NULL,
+    activo TINYINT(1) NOT NULL DEFAULT 1,
     id_categoria INT NOT NULL,
-    imagen VARCHAR(255),
 
     FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
 );

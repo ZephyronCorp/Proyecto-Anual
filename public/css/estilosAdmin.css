@@ -289,6 +289,29 @@ tr.inactivo {
     border-radius: 5px;
 }
 
+.rol {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+}
+
+.rol-cliente {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.rol-admin {
+    background: #d9670f;
+    color: #ffff;
+}
+
+.error {
+    padding: 12px;
+    background: #ff0015;
+    color: #721c24;
+    border-radius: 6px;
+}
+
 .exito {
     padding: 15px;
     background: #00831f;

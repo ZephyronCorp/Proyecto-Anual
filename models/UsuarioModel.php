@@ -30,9 +30,42 @@ class UsuarioModel
     }
 
     public function buscarPorEmail($email){
-        $stmt = $this->conexion->prepare("SELECT id_usuario, nombre, apellido, email, contrasena, id_rol FROM Usuario WHERE email = ?");
+        $stmt = $this->conexion->prepare("SELECT id_usuario, nombre, apellido, email, contrasena, id_rol, activo FROM Usuario WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();
     }
-}
+
+    public function listarTodosAdmin(){
+        $sql = "SELECT u.id_usuario, u.nombre, u.apellido, u.email,u.id_rol, u.activo, u.fecha_registro,COUNT(p.id_pedido) AS cantidad_pedidos 
+                FROM Usuario u LEFT JOIN Pedido p ON p.id_usuario = u.id_usuario
+                GROUP BY u.id_usuario, u.nombre, u.apellido, u.email,u.id_rol, u.activo, u.fecha_registro
+                ORDER BY u.activo DESC, u.nombre ASC";
+        return $this -> conexion -> query($sql) -> fetch_all(MYSQLI_ASSOC);
+    }
+
+    //Obtener un usuario por id
+    public function obtenerPorId($id){
+        $stmt = $this->conexion->prepare(
+            "SELECT id_usuario, nombre, apellido, email, id_rol, activo 
+        FROM Usuario WHERE id_usuario = ?"
+        );
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    //Modificacion del rol de un usuario
+    public function cambiarRol($id, $rol){
+        $stmt = $this->conexion->prepare("UPDATE Usuario SET id_rol = ? WHERE id_usuario = ?");
+        $stmt->bind_param("ii", $rol, $id);
+        return $stmt->execute();
+    }
+
+    //Baja lógica de un usuario o reactivacion
+    public function cambiarActivo($id, $activo){
+        $stmt = $this->conexion->prepare("UPDATE Usuario SET activo = ? WHERE id_usuario = ?");
+        $stmt->bind_param("ii", $activo, $id);
+        return $stmt->execute();
+    }
+ }
