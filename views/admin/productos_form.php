@@ -18,19 +18,19 @@ require __DIR__ . '/../header.php';
         </ul>
     <?php endif; ?>
 
-    <form action="<?= escapar($urlAccion) ?>" method="POST"
+   <form class="formulario-producto" action="<?= escapar($urlAccion) ?>" method="POST"
         enctype="multipart/form-data">
 
         <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" maxlength="100"
+        <input class="campo-producto" type="text" id="nombre" name="nombre" maxlength="100"
             value="<?= escapar($producto['nombre']) ?>" required>
 
         <label for="descripcion">Descripción</label>
-        <textarea id="descripcion" name="descripcion" rows="4"
+        <textarea class="campo-producto" id="descripcion" name="descripcion" rows="4"
             maxlength="500"><?= escapar($producto['descripcion']) ?></textarea>
 
         <label for="id_categoria">Categoría</label>
-        <select id="id_categoria" name="id_categoria" required>
+        <select class="campo-producto" id="id_categoria" name="id_categoria" required>
             <option value="">-- Elegí --</option>
 
             <?php foreach ($categorias as $c): ?>
@@ -43,15 +43,15 @@ require __DIR__ . '/../header.php';
         </select>
 
         <label for="precio">Precio ($)</label>
-        <input type="number" id="precio" name="precio" min="0.01" step="0.01"
+        <input class="campo-producto" type="number" id="precio" name="precio" min="0.01" step="0.01"
             value="<?= escapar($producto['precio']) ?>" required>
 
         <label for="stock">Stock (unidades disponibles)</label>
-        <input type="number" id="stock" name="stock" min="0" step="1"
+        <input class="campo-producto" type="number" id="stock" name="stock" min="0" step="1"
             value="<?= escapar($producto['stock']) ?>" required>
 
         <label for="stock_minimo">Stock mínimo (para la alerta)</label>
-        <input type="number" id="stock_minimo" name="stock_minimo" min="0" step="1"
+        <input class="campo-producto" type="number" id="stock_minimo" name="stock_minimo" min="0" step="1"
             value="<?= escapar($producto['stock_minimo']) ?>" required>
 
         <small>
@@ -72,10 +72,10 @@ require __DIR__ . '/../header.php';
             <?= !empty($producto['imagen'])
                 ? '— dejá vacío para conservar la actual' : '' ?>
         </label>
-        <input type="file" id="imagen" name="imagen"
+        <input class="campo-producto" type="file" id="imagen" name="imagen"
             accept="image/jpeg,image/png,image/webp">
 
-        <input type="submit" value="Guardar">
+        <input class="boton-guardar" type="submit" value="Guardar">
     </form>
 </main>
 

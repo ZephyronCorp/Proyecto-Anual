@@ -19,7 +19,7 @@ require __DIR__ . '/header.php';?>
         <section class ="producto">
 
             <div class="imagenes">
-                <img src="<?php echo htmlspecialchars($producto['imagen']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                <img src="public/img/productos/<?php echo htmlspecialchars($producto['imagen']); ?>" alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
             </div>
 
             <div class="info-producto">
@@ -59,15 +59,15 @@ require __DIR__ . '/header.php';?>
         <h2>Productos Relacionados</h2>
         <section class="productos-relacionados">
             <article class="tarjeta1">
-                <img src="public/img/JuegoRE9.jpg" alt="Resident 9 Requiem PS5">
+                <img src="public/img/productos/JuegoRE9.jpg" alt="Resident 9 Requiem PS5">
                 <h4>Resident 9 Requiem</h4>
             </article>
             <article class="tarjeta2">
-                <img src="public/img/AstroBotFunko.png" alt="Funko Pop Leon S Kennedy">
+                <img src="public/img/productos/AstroBotFunko.png" alt="Funko Pop Leon S Kennedy">
                 <h4>Funko Pop Astro Bot</h4>
             </article>
             <article class="tarjeta3">
-                <img src="public/img/GOWRag.jpg" alt="God of War: Ragnarok PS5">
+                <img src="public/img/productos/GOWRag.jpg" alt="God of War: Ragnarok PS5">
                 <h4>God of War: Ragnarok</h4>
             </article>
         </section>

@@ -45,7 +45,7 @@ require __DIR__ . '/header.php';?>
     <label for="cvv">Código de seguridad (3 dígitos)</label>
     <input type="password" id="cvv" name="cvv" inputmode="numeric" maxlength="3" autocomplete="off" required>
 
-    <input type="submit" value="Pagar">
+    <input class="boton-pagar" type="submit" value="Pagar">
 </form>
 
 <details class="ayuda">

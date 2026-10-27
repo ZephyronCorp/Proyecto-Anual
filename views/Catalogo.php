@@ -69,7 +69,7 @@ require __DIR__ . '/header.php';?>
                         <div class="imagen-producto">
                             <a href="index.php?pagina=producto&id=<?php echo $producto['id_producto']; ?>">
                                 <img
-                                    src="<?php echo htmlspecialchars($producto['imagen']); ?>"
+                                    src="public/img/productos/<?php echo htmlspecialchars($producto['imagen']); ?>"
                                     alt="<?php echo htmlspecialchars($producto['nombre']); ?>"
                                 >
                             </a>

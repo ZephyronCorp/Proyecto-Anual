@@ -67,7 +67,7 @@ class AdminProductoController {
         $titulo = 'Nuevo producto';
         $urlAccion = 'index.php?pagina=admin_producto_crear';
 
-        require __DIR__ . '/../views/admin/producto_form.php';
+        require __DIR__ . '/../views/admin/productos_form.php';
     }
 
     // Modifica un producto.
@@ -131,7 +131,7 @@ class AdminProductoController {
         $titulo = 'Editar producto';
         $urlAccion = 'index.php?pagina=admin_producto_editar&id=' . (int)$idProducto;
 
-        require __DIR__ . '/../views/admin/producto_form.php';
+        require __DIR__ . '/../views/admin/productos_form.php';
     }
 
     // Da de baja un producto o lo reactiva.

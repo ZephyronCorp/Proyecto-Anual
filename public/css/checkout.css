@@ -1,12 +1,12 @@
 /* Reset */
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 /* Header */
-header{
+header {
     padding: 12px 40px;
     display: flex;
     justify-content: space-between;
@@ -18,24 +18,24 @@ header{
     z-index: 1000;
 }
 
-.header-izquierda{
+.header-izquierda {
     display: flex;
     align-items: center;
     gap: 30px;
 }
 
-.logo{
+.logo {
     height: 30px;
     position: relative;
     top: 3px;
 }
 
-.menu{
+.menu {
     display: flex;
     gap: 20px;
 }
 
-.menu a{
+.menu a {
     text-decoration: none;
     color: #8a8a96;
     letter-spacing: 0.5px;
@@ -44,27 +44,27 @@ header{
     padding: 10px;
 }
 
-.menu a:hover{
+.menu a:hover {
     color: #f0ede8;
 }
 
-.header-derecha{
+.header-derecha {
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.header-derecha a{
+.header-derecha a {
     text-decoration: none;
     color: #8a8a96;
     transition: color .3s ease;
 }
 
-.header-derecha a:hover{
+.header-derecha a:hover {
     color: #f0ede8;
 }
 
-.header-derecha img{
+.header-derecha img {
     display: block;
     background-color: rgb(26, 26, 26);
     width: 50px;
@@ -74,21 +74,21 @@ header{
     border-radius: 8px;
 }
 
-.header-derecha img:hover{
+.header-derecha img:hover {
     background-color: #f97316;
 }
 
-.login{
+.login {
     text-decoration: none;
     color: #8a8a96;
     transition: color .3s ease;
 }
 
-.login:hover{
+.login:hover {
     color: #f0ede8;
 }
 
-.register{
+.register {
     text-decoration: none;
     color: #f97316;
     border: 1px solid #f97316;
@@ -97,27 +97,27 @@ header{
     transition: color .3s ease, background-color .3s ease, border-color .3s ease;
 }
 
-.register:hover{
+.register:hover {
     background-color: #f97316;
     color: #161618;
 }
 
 /* Body */
-body{
+body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: #0C0C0E;
     color: white;
 }
 
-h1{
+h1 {
     text-align: center;
     margin: 30px 0;
     font-size: 28px;
 }
 
 /* Resumen de la compra */
-.resumen{
+.resumen {
     width: 600px;
     margin: 0 auto 25px;
     padding: 25px;
@@ -126,31 +126,31 @@ h1{
     border-radius: 8px;
 }
 
-.resumen h2{
+.resumen h2 {
     margin-bottom: 15px;
     font-size: 22px;
 }
 
-.resumen ul{
+.resumen ul {
     list-style: none;
 }
 
-.resumen li{
+.resumen li {
     padding: 10px 0;
     border-bottom: 1px solid #333;
 }
 
-.resumen p{
+.resumen p {
     margin-top: 15px;
     font-size: 18px;
 }
 
-.resumen strong{
+.resumen strong {
     color: #F97316;
 }
 
 /* Formulario de envío */
-form{
+form {
     width: 600px;
     margin: 0 auto 40px;
     padding: 25px;
@@ -159,14 +159,14 @@ form{
     border-radius: 8px;
 }
 
-form label{
+form label {
     display: block;
     margin-bottom: 5px;
     color: #dcdcdc;
 }
 
 form input,
-form select{
+form select {
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
@@ -179,12 +179,12 @@ form select{
 }
 
 form input:focus,
-form select:focus{
+form select:focus {
     outline: 2px solid #F97316;
 }
 
-/* Botón para continuar */
-form input[type="submit"]{
+/* Botón para continuar al pago */
+.boton-continuar {
     background-color: #F97316;
     color: #161618;
     border: none;
@@ -193,12 +193,12 @@ form input[type="submit"]{
     cursor: pointer;
 }
 
-form input[type="submit"]:hover{
+.boton-continuar:hover {
     background-color: #FF8C38;
 }
 
 /* Errores del formulario */
-.errores{
+.errores {
     width: 600px;
     margin: 0 auto 25px;
     padding: 20px 35px;
@@ -208,24 +208,24 @@ form input[type="submit"]:hover{
     color: #ffb4b4;
 }
 
-.errores li{
+.errores li {
     margin-bottom: 5px;
 }
 
 /* Footer */
-footer{
+footer {
     background: #181818;
     text-align: center;
     padding: 35px;
     border-top: 3px solid #d48a42;
 }
 
-footer h3{
+footer h3 {
     color: #d48a42;
     margin-bottom: 15px;
 }
 
-footer p{
+footer p {
     margin: 8px;
     color: #dcdcdc;
 }
@@ -233,74 +233,74 @@ footer p{
 /* Responsive */
 
 /* Tablet */
-@media (max-width:1024px){
-    header{
-        padding:12px 20px;
-        
+@media (max-width:1024px) {
+    header {
+        padding: 12px 20px;
+
     }
 
-    .header-izquierda{
-        gap:20px;
-        font-size:14px;
+    .header-izquierda {
+        gap: 20px;
+        font-size: 14px;
     }
 
-    .header-derecha{
-        font-size:14px;
-        gap:10px;
+    .header-derecha {
+        font-size: 14px;
+        gap: 10px;
     }
 
-    .menu{
-        gap:10px;
+    .menu {
+        gap: 10px;
     }
 
     .resumen,
     form,
-    .errores{
+    .errores {
         width: 80%;
     }
 }
 
 /* Celular */
-@media (max-width:768px){
-    header{
-        flex-direction:column;
-        gap:15px;
-        padding:20px;
+@media (max-width:768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
     }
 
-    .header-izquierda{
-        flex-direction:column;
-        gap:10px;
+    .header-izquierda {
+        flex-direction: column;
+        gap: 10px;
     }
 
-    .header-derecha{
-        justify-content:center;
-        font-size:14px;
+    .header-derecha {
+        justify-content: center;
+        font-size: 14px;
     }
 
-    .menu{
-        width:100%;
-        justify-content:center;
-        gap:10px;
+    .menu {
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
     }
 
-    h1{
+    h1 {
         font-size: 24px;
         margin: 25px 0;
     }
 
     .resumen,
-    form{
+    form {
         width: 90%;
         padding: 20px;
     }
 
-    .errores{
+    .errores {
         width: 90%;
         padding: 20px 30px;
     }
 
-    footer{
+    footer {
         padding: 25px 15px;
     }
 }

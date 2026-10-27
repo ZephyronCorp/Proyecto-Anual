@@ -25,7 +25,7 @@ require __DIR__ . '/header.php';
         <a href="index.php?pagina=admin_usuarios">Ver usuarios</a>
     </article>
 </section>
-
+<p class = "frase" >Agregar, editar, dar de baja o reactivar productos del catálogo.</p>
 <section>
     <h2>Últimos pedidos</h2>
     <table class="tabla">
@@ -57,6 +57,53 @@ require __DIR__ . '/header.php';
 </table>
 <p><em>(Datos de ejemplo: más adelante se reemplazan por los
 pedidos reales.)</em></p>
+</section>
+
+<section class="alerta-stock">
+    <h2>Alertas de stock</h2>
+
+    <?php if (empty($productosStockBajo)): ?>
+        <p>Todo en orden: ningún producto tiene stock bajo o agotado.</p>
+    <?php else: ?>
+        <p class="aviso-stock">
+            <?= count($productosStockBajo) ?> producto(s) con stock bajo o agotado.
+        </p>
+
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Stock</th>
+                    <th>Mínimo</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <?php foreach ($productosStockBajo as $p): ?>
+                    <tr>
+                        <td><?= escapar($p['nombre']) ?></td>
+                        <td><?= (int)$p['stock'] ?></td>
+                        <td><?= (int)$p['stock_minimo'] ?></td>
+
+                        <td>
+                            <span class="stock stock-<?= escapar($p['nivel_stock']) ?>">
+                                <?= ($p['nivel_stock'] === 'agotado')
+                                    ? 'Sin stock' : 'Stock bajo' ?>
+                            </span>
+                        </td>
+
+                        <td>
+                            <a href="index.php?pagina=admin_producto_editar&id=<?= (int)$p['id_producto'] ?>">
+                                Reponer
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endif; ?>
 </section>
 <?php require __DIR__ . '/footer.php'; ?>
 

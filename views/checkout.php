@@ -66,7 +66,7 @@ require __DIR__ . '/header.php';
     <input type="text" id="telefono" name="telefono" inputmode="numeric"
         value="<?= escapar($envio['telefono']) ?>" required>
 
-    <input type="submit" name="confirmar" value="Continuar al pago">
+    <input class="boton-continuar" type="submit" name="confirmar" value="Continuar al pago">
 </form>
 
 <?php require __DIR__ . '/footer.php'; ?>
