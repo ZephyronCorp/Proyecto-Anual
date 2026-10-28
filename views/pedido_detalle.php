@@ -76,6 +76,14 @@ require __DIR__ . '/header.php';
         Tel.: <?= escapar($pedido['envio_telefono']) ?>
     </p>
 
+    <?php if ($pedido['estado'] === 'pagado'): ?>
+        <p>
+            <a href="index.php?pagina=factura&id=<?= (int)$pedido['id_pedido'] ?>">
+                Ver / imprimir factura
+            </a>
+        </p>
+    <?php endif; ?>
+    
     <p>
         <?php if ($pedido['estado'] !== 'pagado'): ?>
             <a href="index.php?pagina=pago&id=<?= (int)$pedido['id_pedido'] ?>">

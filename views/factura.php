@@ -5,7 +5,7 @@ require __DIR__ . '/header.php';?>
 
 <div class="barra no-imprimir">
         <button onclick="window.print()">Descargar PDF / Imprimir</button>
-        <a href="index.php?pagina=pedido_detalle&id=<?= (int)$pedido['id_pedido'] ?>">
+        <a href="<?= escapar($urlVolver) ?>">
             Volver al pedido
         </a>
     </div>

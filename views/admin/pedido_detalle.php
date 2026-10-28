@@ -120,7 +120,17 @@ require __DIR__ . '/../header.php';
         <?php endif; ?>
     <?php endif; ?>
 
-<!-- La etapa 4 agrega el enlace a la factura. -->
+    <h2>Factura</h2>
+
+    <?php if ($pedido['estado'] === 'pagado'): ?>
+        <p>
+            <a href="index.php?pagina=admin_pedido_factura&id=<?= (int)$pedido['id_pedido'] ?>">
+                Ver / imprimir factura
+            </a>
+        </p>
+    <?php else: ?>
+        <p>Este pedido no está pagado, por eso todavía no tiene factura.</p>
+    <?php endif; ?>
 </main>
 
 <?php require __DIR__ . '/../footer.php'; ?>

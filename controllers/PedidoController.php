@@ -160,6 +160,7 @@ class PedidoController {
         $pago = $this->pagoModel->obtenerAprobado($pedido['id_pedido']);
         $numeroFactura = str_pad($pedido['id_pedido'], 6, '0', STR_PAD_LEFT); // 000005
         $cliente = usuarioActualNombre();
+        $urlVolver = 'index.php?pagina=pedido-detalle&id=' . (int)$pedido['id_pedido'];
 
         require __DIR__ . '/../views/factura.php';
     }

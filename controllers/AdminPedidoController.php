@@ -133,6 +133,45 @@ class AdminPedidoController {
         redirigir('admin_pedido_detalle', $volver . '&msg=fallo');
     }
 
+    // Muestra la factura de cualquier pedido pagado.
+    public function factura() {
+        $idPedido = $this->leerIdDeLaUrl();
+
+        $pedido = ($idPedido !== null)
+            ? $this->pedidoModel->obtenerParaAdmin($idPedido)
+            : null;
+
+        if (!$pedido) {
+            redirigir('admin_pedidos', '&msg=invalido');
+        }
+
+        // Solo se pueden facturar pedidos pagados.
+        if ($pedido['estado'] !== 'pagado') {
+            redirigir(
+                'admin_pedido_detalle',
+                '&id=' . (int)$pedido['id_pedido'] . '&msg=sin_factura'
+            );
+        }
+
+        $detalle = $this->pedidoModel->obtenerDetalle($pedido['id_pedido']);
+        $pago = $this->pagoModel->obtenerAprobado($pedido['id_pedido']);
+
+        $numeroFactura = str_pad(
+            $pedido['id_pedido'],
+            6,
+            '0',
+            STR_PAD_LEFT
+        );
+
+        // Nombre del comprador, obtenido desde la base.
+        $cliente = $pedido['cliente_nombre'];
+
+        $urlVolver = 'index.php?pagina=admin_pedido_detalle&id='
+            . (int)$pedido['id_pedido'];
+
+        require __DIR__ . '/../views/factura.php';
+    }
+
     // Lee el ID de la URL y devuelve un entero positivo o null.
     private function leerIdDeLaUrl() {
         $idPedido = filter_var(
