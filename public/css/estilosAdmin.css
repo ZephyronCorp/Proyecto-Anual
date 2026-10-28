@@ -336,6 +336,51 @@ tr.inactivo {
     background: #ff9800;
 }
 
+
+.estado {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.85em;
+}
+
+.estado-pendiente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.estado-pagado {
+    background: #d4edda;
+    color: #155724;
+}
+
+.estado-rechazado {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.estado-preparando {
+    background: #e2e3e5;
+    color: #383d41;
+}
+
+.estado-enviado {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.estado-entregado {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.filtros {
+    margin: 16px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 /* Footer */
 footer {
 

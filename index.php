@@ -16,6 +16,7 @@ require_once __DIR__ . '/controllers/UsuarioController.php';
 require_once __DIR__ . '/controllers/AdminController.php';
 require_once __DIR__ . '/controllers/AdminProductoController.php';
 require_once __DIR__ . '/controllers/AdminUsuarioController.php';
+require_once __DIR__ . '/controllers/AdminPedidoController.php';
 
 // Verifica la cuenta y actualiza la sesión antes de mostrar una página.
 sincronizarSesion(new UsuarioModel($conexion));
@@ -108,6 +109,14 @@ switch ($paginaSolicitada) {
 
     case 'admin_usuario_estado':
         (new AdminUsuarioController($conexion))->cambiarEstado();
+        break;
+
+    case 'admin_pedidos':
+        (new AdminPedidoController($conexion))->listar();
+        break;
+
+    case 'admin_pedido_detalle':
+        (new AdminPedidoController($conexion))->ver();
         break;
     
     case 'sin_permiso':
