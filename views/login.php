@@ -26,6 +26,14 @@ require __DIR__ . '/header.php';?>
           <p class="exito"><?= escapar($mensajeOk) ?></p>
       <?php endif; ?>
       <h2>Bienvenido de nuevo</h2>
+      
+      <?php if (($_GET['cuenta'] ?? '') === 'desactivada'): ?>
+        <p class="error">
+            Tu sesión se cerró porque la cuenta fue desactivada o ya no existe.
+            Si creés que es un error, comunicate con el administrador.
+        </p>
+      <?php endif; ?>
+
       <form id="formLogin" method="POST" action="/Proyecto-Anual/index.php?pagina=login">
         <div class="campo">
           <label for="email">Correo electrónico</label>

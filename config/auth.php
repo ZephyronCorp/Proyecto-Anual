@@ -72,3 +72,21 @@ function requerirRol($rol) {
         exit;
     }
 }
+
+// Comprueba que la cuenta siga activa y actualiza los datos de la sesión.
+function sincronizarSesion($usuarioModel) {
+    if (!estaLogueado()) {
+        return;
+    }
+
+    $usuario = $usuarioModel->obtenerPorId(usuarioActualId());
+
+    if (!$usuario || (int)$usuario['activo'] !== 1) {
+        cerrarSesion();
+        redirigir('login', '&cuenta=desactivada');
+    }
+
+    $_SESSION['id_rol'] = (int)$usuario['id_rol'];
+    $_SESSION['nombre'] = $usuario['nombre'];
+    $_SESSION['apellido'] = $usuario['apellido'];
+}

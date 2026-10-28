@@ -17,7 +17,10 @@ require_once __DIR__ . '/controllers/AdminController.php';
 require_once __DIR__ . '/controllers/AdminProductoController.php';
 require_once __DIR__ . '/controllers/AdminUsuarioController.php';
 
-//Pagina solicitada por el usuario.
+// Verifica la cuenta y actualiza la sesión antes de mostrar una página.
+sincronizarSesion(new UsuarioModel($conexion));
+
+// Página solicitada por el usuario.
 $paginaSolicitada = isset($_GET['pagina']) ? $_GET['pagina'] : 'home';
 
 switch ($paginaSolicitada) {
