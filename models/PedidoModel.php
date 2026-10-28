@@ -98,4 +98,107 @@ class PedidoModel {
             return false;
         }
     }
+
+    // Métodos para el panel de administración.
+
+    // Lista los pedidos con el nombre del cliente y filtros opcionales.
+    public function listarAdmin($filtros = []) {
+        $sql = "SELECT p.id_pedido, p.fecha, p.total, p.estado,
+                    p.estado_envio, u.nombre AS cliente
+                FROM Pedido p
+                INNER JOIN Usuario u ON u.id_usuario = p.id_usuario
+                WHERE 1=1";
+
+        $tipos = '';
+        $params = [];
+
+        if (!empty($filtros['estado'])) {
+            $sql .= " AND p.estado = ?";
+            $tipos .= 's';
+            $params[] = $filtros['estado'];
+        }
+
+        if (!empty($filtros['estado_envio'])) {
+            $sql .= " AND p.estado_envio = ?";
+            $tipos .= 's';
+            $params[] = $filtros['estado_envio'];
+        }
+
+        if (!empty($filtros['desde'])) {
+            $sql .= " AND p.fecha >= ?";
+            $tipos .= 's';
+            $params[] = $filtros['desde'];
+        }
+
+        if (!empty($filtros['hasta'])) {
+            // Incluye todos los pedidos del último día elegido.
+            $sql .= " AND p.fecha < DATE_ADD(?, INTERVAL 1 DAY)";
+            $tipos .= 's';
+            $params[] = $filtros['hasta'];
+        }
+
+        $sql .= " ORDER BY p.fecha DESC, p.id_pedido DESC";
+
+        if (!empty($filtros['limite'])) {
+            $sql .= " LIMIT " . (int)$filtros['limite'];
+        }
+
+        $stmt = $this->conexion->prepare($sql);
+
+        if (!empty($params)) {
+            $stmt->bind_param($tipos, ...$params);
+        }
+
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
+
+    // Obtiene cualquier pedido con los datos de su cliente.
+    public function obtenerParaAdmin($idPedido) {
+        $stmt = $this->conexion->prepare(
+            "SELECT p.*, u.nombre AS cliente_nombre,
+                    u.email AS cliente_email
+            FROM Pedido p
+            INNER JOIN Usuario u ON u.id_usuario = p.id_usuario
+            WHERE p.id_pedido = ?"
+        );
+
+        $stmt->bind_param("i", $idPedido);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_assoc();
+    }
+
+    // Cambia el envío solo si el pedido está pagado y conserva el estado esperado.
+    public function cambiarEstadoEnvio($idPedido, $estadoActual, $estadoNuevo) {
+        $stmt = $this->conexion->prepare(
+            "UPDATE Pedido
+            SET estado_envio = ?
+            WHERE id_pedido = ?
+                AND estado = 'pagado'
+                AND estado_envio = ?"
+        );
+
+        $stmt->bind_param("sis", $estadoNuevo, $idPedido, $estadoActual);
+        $stmt->execute();
+
+        return $stmt->affected_rows === 1;
+    }
+
+    // Cuenta los pedidos y suma sus importes por estado de pago.
+    public function resumenPorEstado($desde, $hasta) {
+        $stmt = $this->conexion->prepare(
+            "SELECT estado, COUNT(*) AS cantidad, SUM(total) AS total
+            FROM Pedido
+            WHERE fecha >= ?
+                AND fecha < DATE_ADD(?, INTERVAL 1 DAY)
+            GROUP BY estado"
+        );
+
+        $stmt->bind_param("ss", $desde, $hasta);
+        $stmt->execute();
+
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    }
 }
