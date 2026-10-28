@@ -24,6 +24,12 @@ require __DIR__ . '/header.php';
         <p>Consultar las cuentas registradas.</p>
         <a href="index.php?pagina=admin_usuarios">Ver usuarios</a>
     </article>
+
+    <article class="tarjeta">
+        <h2>Informe</h2>
+        <p>Ventas y transacciones por rango de fechas.</p>
+        <a href="index.php?pagina=admin_informe">Ver informe</a>
+    </article>
 </section>
 <p class = "frase" >Agregar, editar, dar de baja o reactivar productos del catálogo.</p>
 <section>

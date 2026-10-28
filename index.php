@@ -127,6 +127,10 @@ switch ($paginaSolicitada) {
         (new AdminPedidoController($conexion))->factura();
         break;
 
+    case 'admin_informe':
+        (new AdminPedidoController($conexion))->informe();
+        break;
+        
     case 'sin_permiso':
         require __DIR__ . '/views/sin_permiso.php';
         break;

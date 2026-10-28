@@ -8,6 +8,8 @@ require __DIR__ . '/../header.php';
 
     <p>
         <a href="index.php?pagina=admin">Volver al panel</a>
+        |
+        <a href="index.php?pagina=admin_informe">Informe de transacciones</a>
     </p>
 
     <?php if ($aviso !== null): ?>

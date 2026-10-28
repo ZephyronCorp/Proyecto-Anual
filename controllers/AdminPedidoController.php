@@ -172,6 +172,64 @@ class AdminPedidoController {
         require __DIR__ . '/../views/factura.php';
     }
 
+    // Muestra el informe de transacciones por fechas.
+    public function informe() {
+        $desde = $this->leerFecha('desde') ?: date('Y-m-01');
+        $hasta = $this->leerFecha('hasta') ?: date('Y-m-d');
+
+        $errores = [];
+
+        $resumen = [
+            'pendiente' => ['cantidad' => 0, 'total' => 0],
+            'pagado' => ['cantidad' => 0, 'total' => 0],
+            'rechazado' => ['cantidad' => 0, 'total' => 0]
+        ];
+
+        $ventas = [];
+
+            if ($desde > $hasta) {    
+            $errores[] = 'La fecha "desde" no puede ser posterior a la fecha "hasta".';    
+        } else {
+        // Completa el resumen con los datos de la base.
+            foreach ($this->pedidoModel->resumenPorEstado($desde, $hasta) as $fila) {
+                $resumen[$fila['estado']] = [
+                    'cantidad' => (int)$fila['cantidad'],
+                    'total' => (float)$fila['total']
+                ];
+            }
+
+            // Solo los pedidos pagados cuentan como ventas.
+            $ventas = $this->pedidoModel->listarAdmin([
+                'estado' => 'pagado',
+                'desde' => $desde,
+                'hasta' => $hasta
+            ]);
+        }
+
+        $cantidadVentas = $resumen['pagado']['cantidad'];
+        $totalVentas = $resumen['pagado']['total'];
+
+        $promedio = ($cantidadVentas > 0)
+            ? $totalVentas / $cantidadVentas
+            : 0;
+
+        require __DIR__ . '/../views/admin/informe.php';
+    }   
+
+    // Lee una fecha válida de la URL con formato AAAA-MM-DD.
+    private function leerFecha($clave) {
+        $valor = $_GET[$clave] ?? '';
+
+        if (!is_string($valor)) {
+            return '';
+        }
+
+        $fecha = DateTime::createFromFormat('Y-m-d', $valor);
+
+        return ($fecha && $fecha->format('Y-m-d') === $valor)
+            ? $valor
+            : '';
+    }
     // Lee el ID de la URL y devuelve un entero positivo o null.
     private function leerIdDeLaUrl() {
         $idPedido = filter_var(
