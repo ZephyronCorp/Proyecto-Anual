@@ -119,6 +119,10 @@ switch ($paginaSolicitada) {
         (new AdminPedidoController($conexion))->ver();
         break;
     
+    case 'admin_pedido_envio':
+        (new AdminPedidoController($conexion))->cambiarEnvio();
+        break;
+        
     case 'sin_permiso':
         require __DIR__ . '/views/sin_permiso.php';
         break;

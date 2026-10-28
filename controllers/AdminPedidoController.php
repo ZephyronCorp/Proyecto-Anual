@@ -87,6 +87,52 @@ class AdminPedidoController {
         require __DIR__ . '/../views/admin/pedido_detalle.php';
     }
 
+    // Avanza el estado de envío de un pedido.
+    public function cambiarEnvio() {
+        // Solo se permite modificar mediante POST.
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirigir('admin_pedidos');
+        }
+
+        $idPedido = $this->leerIdDeLaUrl();
+        $nuevo = $_POST['nuevo'] ?? '';
+
+        if ($idPedido === null ||!in_array($nuevo, $this->estadosEnvio, true)) {
+            redirigir('admin_pedidos', '&msg=invalido');
+        }
+
+        // Comprueba que el pedido exista.
+        $pedido = $this->pedidoModel->obtenerParaAdmin($idPedido);
+
+        if (!$pedido) {
+            redirigir('admin_pedidos', '&msg=invalido');
+        }
+
+        $volver = '&id=' . $idPedido;
+
+        // Solo se puede enviar un pedido pagado.
+        if ($pedido['estado'] !== 'pagado') {
+            redirigir('admin_pedido_detalle', $volver . '&msg=transicion');
+        }
+
+        // Solo se permite avanzar al siguiente estado.
+        $esperado = $this->siguienteEnvio[$pedido['estado_envio']] ?? null;
+
+        if ($esperado !== $nuevo) {
+            redirigir('admin_pedido_detalle', $volver . '&msg=transicion');
+        }
+
+        if ($this->pedidoModel->cambiarEstadoEnvio(
+            $idPedido,
+            $pedido['estado_envio'],
+            $nuevo
+        )) {
+            redirigir('admin_pedido_detalle', $volver . '&msg=envio_ok');
+        }
+
+        redirigir('admin_pedido_detalle', $volver . '&msg=fallo');
+    }
+
     // Lee el ID de la URL y devuelve un entero positivo o null.
     private function leerIdDeLaUrl() {
         $idPedido = filter_var(

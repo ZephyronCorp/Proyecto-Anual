@@ -91,7 +91,36 @@ require __DIR__ . '/../header.php';
         Tel.: <?= escapar($pedido['envio_telefono']) ?>
     </p>
 
-    <!-- Las etapas 3 y 4 agregan el estado de envío y el enlace a la factura. -->
+    <h2>Estado de envío</h2>
+
+    <?php if ($pedido['estado'] !== 'pagado'): ?>
+        <p>El pedido todavía no está pagado, por eso no se puede enviar.</p>
+    <?php else: ?>
+        <p>
+            Estado actual:
+            <span class="estado estado-<?= escapar($pedido['estado_envio']) ?>">
+                <?= escapar(ucfirst($pedido['estado_envio'])) ?>
+            </span>
+        </p>
+
+        <?php if ($siguiente !== null): ?>
+            <form action="index.php?pagina=admin_pedido_envio&id=<?= (int)$pedido['id_pedido'] ?>"
+                method="POST" class="en-linea">
+
+                <input type="hidden" name="nuevo"
+                    value="<?= escapar($siguiente) ?>">
+
+                <button type="submit"
+                    onclick="return confirm('¿Cambiar el envío a <?= escapar($siguiente) ?>?');">
+                    Marcar como <?= escapar($siguiente) ?>
+                </button>
+            </form>
+        <?php else: ?>
+            <p>El pedido ya fue entregado. No hay más pasos.</p>
+        <?php endif; ?>
+    <?php endif; ?>
+
+<!-- La etapa 4 agrega el enlace a la factura. -->
 </main>
 
 <?php require __DIR__ . '/../footer.php'; ?>

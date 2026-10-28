@@ -18,6 +18,15 @@ require __DIR__ . '/header.php';
         </span>
     </p>
 
+    <?php if ($pedido['estado'] === 'pagado'): ?>
+        <p>
+            Envío:
+            <span class="estado estado-<?= escapar($pedido['estado_envio']) ?>">
+                <?= escapar(ucfirst($pedido['estado_envio'])) ?>
+            </span>
+        </p>
+    <?php endif; ?>
+    
     <h2>Productos</h2>
 
     <table class="tabla-pedidos">
