@@ -102,6 +102,10 @@ switch ($paginaSolicitada) {
     case 'admin_usuario_rol':
         (new AdminUsuarioController($conexion))->cambiarRol();
         break;
+
+    case 'admin_usuario_estado':
+        (new AdminUsuarioController($conexion))->cambiarEstado();
+        break;
     
     case 'sin_permiso':
         require __DIR__ . '/views/sin_permiso.php';

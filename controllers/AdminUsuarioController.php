@@ -99,6 +99,35 @@ class AdminUsuarioController {
         redirigir('admin_usuarios', '&msg=fallo');
     }
 
+    // ---------- DESACTIVAR / REACTIVAR ----------
+    public function cambiarEstado() {
+        // Solo por POST: un link (GET) nunca debe poder dar de baja nada
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            redirigir('admin_usuarios');
+        }
+
+        $id = $this ->leerIdDeLaUrl();
+        $activo = (($_POST['activo'] ?? '') === '1') ? 1 : 0;
+
+        if ($id === null) {
+            redirigir('admin_usuarios', '&msg=invalido');
+        }
+        if ($id === (int)usuarioActualId()) {
+            redirigir('admin_usuarios', '&msg=propio');
+        }
+
+        // Comprueba que el usuario exista
+        if (!$this->usuarioModel->obtenerPorId($id)) {
+            redirigir('admin_usuarios', '&msg=invalido');
+        }
+
+        // Guarda el cambio de estado
+        if ($this->usuarioModel->cambiarActivo($id, $activo)) {
+                        redirigir('admin_usuarios', $activo ? '&msg=reactivado' : '&msg=desactivado');
+        }
+        redirigir('admin_usuarios', '&msg=fallo');
+    }
+
     // Lee el ID de la URL y devuelve un entero positivo o null.
     private function leerIdDeLaUrl() {
         $idUsuario = filter_var(

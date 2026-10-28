@@ -92,6 +92,21 @@ require __DIR__ . '/../header.php';
                                         Cambiar rol
                                     </button>
                                 </form>
+                                <form action="index.php?pagina=admin_usuario_estado&id=<?= (int)$u['id_usuario'] ?>"
+                                method="POST" class="en-linea">
+
+                                <?php if ((int)$u['activo'] === 1): ?>
+                                    <input type="hidden" name="activo" value="0">
+                                    <button type="submit"
+                                    onclick="return confirm('¿Desactivar esta cuenta? La persona no podrá iniciar sesión.');">
+                                        Desactivar
+                                    </button>
+                                <?php else: ?>
+                                    <input type="hidden" name="activo" value="1">
+
+                                    <button type="submit">Reactivar</button>
+                                <?php endif; ?>
+                                </form>
                             <?php endif; ?>
                         </td>
                     </tr>

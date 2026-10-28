@@ -18,7 +18,7 @@ function mostrarCarrito() {
 
   carrito.forEach(item => {
     const subtotal = item.precio * item.cantidad;
-    total += subtotal;
+    Math.round(total += subtotal, 2);
 
     // 1) Crear el elemento
     const div = document.createElement("div");
@@ -88,32 +88,32 @@ function vaciarCarrito() {
 
 
 function finalizarCompra() {
-    const carritoActual = cargarCarrito();
-    // No continuar si el carrito está vacío.
-    if (carritoActual.length === 0) {
-        return;
-    }
-    // Crear el formulario que enviará el carrito a PHP.
-    const formularioOculto = document.createElement("form");
-    formularioOculto.method = "POST";
-    formularioOculto.action = "index.php?pagina=checkout";
+  const carritoActual = cargarCarrito();
+  // No continuar si el carrito está vacío.
+  if (carritoActual.length === 0) {
+    return;
+  }
+  // Crear el formulario que enviará el carrito a PHP.
+  const formularioOculto = document.createElement("form");
+  formularioOculto.method = "POST";
+  formularioOculto.action = "index.php?pagina=checkout";
 
-    // Enviar solo los identificadores y las cantidades.
-    const campoOculto = document.createElement("input");
-    campoOculto.type = "hidden";
-    campoOculto.name = "carritoJson";
-    campoOculto.value = JSON.stringify(carritoActual.map(function(item){
-      return{
-        id: item.id,
-        cantidad: item.cantidad
-      };
-    })
+  // Enviar solo los identificadores y las cantidades.
+  const campoOculto = document.createElement("input");
+  campoOculto.type = "hidden";
+  campoOculto.name = "carritoJson";
+  campoOculto.value = JSON.stringify(carritoActual.map(function (item) {
+    return {
+      id: item.id,
+      cantidad: item.cantidad
+    };
+  })
   );
 
-    formularioOculto.appendChild(campoOculto);
-    document.body.appendChild(formularioOculto);
+  formularioOculto.appendChild(campoOculto);
+  document.body.appendChild(formularioOculto);
 
-    formularioOculto.submit();
+  formularioOculto.submit();
 }
 
 
