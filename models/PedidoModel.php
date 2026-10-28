@@ -28,7 +28,7 @@ class PedidoModel {
 
     // Agrega un detalle de pedido a la base de datos.
     public function agregarDetallePedido($idPedido, $idProducto, $cantidad, $precioUnitario) {
-        $consultaSql = "INSERT INTO Detalle_Producto (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
+        $consultaSql = "INSERT INTO Detalle_Pedido (id_pedido, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
         $consultaPreparada = mysqli_prepare($this->conexion, $consultaSql);
         mysqli_stmt_bind_param($consultaPreparada, "iiid", $idPedido, $idProducto, $cantidad, $precioUnitario);
         mysqli_stmt_execute($consultaPreparada);
@@ -60,7 +60,7 @@ class PedidoModel {
         $stmt = $this->conexion->prepare(
         "SELECT p.nombre, d.cantidad, d.precio AS precio_unitario,
                 (d.cantidad * d.precio) AS subtotal
-         FROM Detalle_Producto d
+         FROM Detalle_Pedido d
          INNER JOIN Producto p ON p.id_producto = d.id_producto
          WHERE d.id_pedido = ?"
         );

@@ -31,6 +31,10 @@ class UsuarioController {
                 $errores[] = "El nombre debe tener entre 2 y 50 caracteres.";
             }
 
+            if (mb_strlen($apellido) < 2 || mb_strlen($apellido) > 50) {
+                $errores[] = "El apellido debe tener entre 2 y 50 caracteres.";
+            }
+
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $errores[] = "El correo electrónico no es válido.";
             } elseif ($this->usuarioModel->existeEmail($email)) {
