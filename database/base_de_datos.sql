@@ -122,7 +122,7 @@ VALUES (
     'Admin',
     'Prueba',
     'admin@zonajoystick.com',
-    '$2b$12$0nN7MOfwwsneydBklXsZGuNKkNonZBhzX4MC1n0DuJe6u90pTu.bW',
+    '$2y$10$9cloUOThzgPME4MQbGRndeW/PfJmhEKX8CcG4.OHH1T35WfTyd0Ze',
     1
 );
 
@@ -132,6 +132,6 @@ VALUES (
     'Cliente',
     'Prueba',
     'cliente@zonajoystick.com',
-    '$2b$12$0nN7MOfwwsneydBklXsZGuNKkNonZBhzX4MC1n0DuJe6u90pTu.bW',
+    '$2y$10$pE05b5lzCyYrrwpIU8gVyehS5POrdfxzcOrPFZXVy3fsO6zoS4F2K',
     2
 );

@@ -2,6 +2,7 @@
 <?php
 $css = "style.css";
 require __DIR__ . '/header.php';?>
+
     <main>
         <section class="banner">
             <img src="/Proyecto-Anual/public/img/Banner.png" alt="Banner Principal" width="1300" height="200"
