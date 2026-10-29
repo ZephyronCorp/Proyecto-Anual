@@ -1,0 +1,351 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del sitio */
+body {
+    background: #111;
+    color: white;
+    line-height: 1.6;
+    font-family: Arial, sans-serif;
+}
+
+/* Header */
+header {
+    padding: 12px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #161618;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-izquierda {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.logo {
+    height: 30px;
+    position: relative;
+    top: 3px;
+}
+
+.menu {
+    display: flex;
+    gap: 20px;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #8a8a96;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+    font-weight: normal;
+    padding: 10px;
+}
+
+.menu a:hover {
+    color: #f0ede8;
+}
+
+.header-derecha {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header-derecha a {
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color 0.3s ease;
+}
+
+.header-derecha a:hover {
+    color: #f0ede8;
+}
+
+.header-derecha img {
+    display: block;
+    background-color: rgb(26, 26, 26);
+    width: 50px;
+    height: 40px;
+    transition: transform 0.3s ease;
+    border: 1px solid #f97316;
+    border-radius: 8px;
+}
+
+.header-derecha img:hover {
+    background-color: #f97316;
+}
+
+.login {
+    text-decoration: none;
+    color: #8a8a96;
+    transition: color 0.3s ease;
+}
+
+.login:hover {
+    color: #f0ede8;
+}
+
+.register {
+    text-decoration: none;
+    color: #f97316;
+    border: 1px solid #f97316;
+    padding: 8px 18px;
+    border-radius: 8px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.register:hover {
+    background-color: #f97316;
+    color: #161618;
+}
+
+/* Contenido de contacto y mis mensajes */
+.pagina-mensajes {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.pagina-mensajes h1 {
+    margin-bottom: 15px;
+}
+
+.pagina-mensajes p {
+    margin-bottom: 12px;
+}
+
+.pagina-mensajes a {
+    color: #f97316;
+}
+
+.pagina-mensajes a:hover {
+    color: #ff9800;
+}
+
+/* Formulario para enviar una consulta */
+.formulario-mensaje {
+    background: #1b1b1b;
+    padding: 25px;
+    margin-top: 25px;
+    border: 1px solid #f97316;
+    border-radius: 8px;
+}
+
+/* Etiquetas del formulario */
+.formulario-mensaje label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Campos del asunto y del mensaje */
+.campo-mensaje {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #111;
+    color: white;
+    border: 1px solid #777;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.campo-mensaje:focus {
+    outline: 2px solid #f97316;
+}
+
+/* Botón para enviar la consulta */
+.boton-mensaje {
+    padding: 12px 20px;
+    background: #f97316;
+    color: #161618;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-mensaje:hover {
+    background: #ff9800;
+}
+
+/* Tarjeta de cada consulta enviada */
+.mensaje-caja {
+    background: #1b1b1b;
+    border: 1px solid #555;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    overflow-wrap: break-word;
+}
+
+.mensaje-caja h2 {
+    margin-bottom: 10px;
+    color: #f97316;
+}
+
+/* Fecha de envío y de respuesta */
+.fecha-mensaje {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Consulta pendiente de respuesta */
+.mensaje-pendiente {
+    color: #ffbb55;
+    margin-top: 15px;
+}
+
+/* Respuesta del administrador */
+.respuesta-mensaje {
+    background: #242424;
+    border-left: 3px solid #f97316;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.respuesta-mensaje h3 {
+    color: #f97316;
+    margin-bottom: 10px;
+}
+
+/* Mensaje de envío correcto */
+.pagina-mensajes .exito {
+    color: #8ed69b;
+    margin-top: 15px;
+}
+
+/* Errores del formulario */
+.pagina-mensajes .error,
+.pagina-mensajes .errores {
+    color: #ff9292;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.pagina-mensajes .errores {
+    padding-left: 20px;
+}
+
+/* Acceso flotante a mensajes */
+.boton-mensajes-flotante {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #f97316;
+    color: #161618;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    z-index: 1001;
+}
+
+.boton-mensajes-flotante:hover {
+    background: #ff9800;
+}
+
+
+/* Footer */
+footer {
+    background: #181818;
+    text-align: center;
+    padding: 35px;
+    border-top: 3px solid #d48a42;
+}
+
+footer h3 {
+    color: #d48a42;
+    margin-bottom: 15px;
+}
+
+footer p {
+    margin: 8px;
+    color: #dcdcdc;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    header {
+        padding: 12px 20px;
+    }
+
+    .header-izquierda {
+        gap: 20px;
+        font-size: 14px;
+    }
+
+    .header-derecha {
+        font-size: 14px;
+        gap: 10px;
+    }
+
+    .menu {
+        gap: 10px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+    }
+
+    .header-izquierda {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-derecha {
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    .menu {
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .pagina-mensajes {
+        margin: 25px auto;
+    }
+
+    .pagina-mensajes h1 {
+        font-size: 26px;
+    }
+
+    .formulario-mensaje {
+        padding: 15px;
+    }
+
+    .mensaje-caja {
+        padding: 15px;
+    }
+
+    .boton-mensaje {
+        width: 100%;
+    }
+
+    .boton-mensajes-flotante {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px 15px;
+    }
+}

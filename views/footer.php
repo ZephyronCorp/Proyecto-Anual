@@ -1,3 +1,9 @@
+    <?php if (estaLogueado()): ?>
+        <a class="boton-mensajes-flotante"
+            href="index.php?pagina=mis_mensajes">
+            Mensajes
+        </a>
+    <?php endif; ?>
     <footer>
         <hr>
         <h3>Contacto</h3>

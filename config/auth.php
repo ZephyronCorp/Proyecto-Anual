@@ -90,3 +90,18 @@ function sincronizarSesion($usuarioModel) {
     $_SESSION['nombre'] = $usuario['nombre'];
     $_SESSION['apellido'] = $usuario['apellido'];
 }
+
+// Lee un campo de texto enviado por POST.
+function leerTextoPost($campo) {
+    $valor = $_POST[$campo] ?? '';
+
+    if (!is_string($valor)) {
+        return '';
+    }
+
+    // Unifica los saltos de línea.
+    $valor = str_replace("\r\n", "\n", $valor);
+
+    return trim($valor);
+}
+

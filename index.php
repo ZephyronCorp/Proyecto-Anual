@@ -8,6 +8,7 @@ require_once __DIR__ . '/config/auth.php';
 require_once __DIR__ . '/models/ProductoModel.php';
 require_once __DIR__ . '/models/PedidoModel.php';
 require_once __DIR__ . '/models/UsuarioModel.php';
+require_once __DIR__ . '/models/MensajeModel.php';
 
 //Clases de controllers.
 require_once __DIR__ . '/controllers/ProductoController.php';
@@ -17,6 +18,7 @@ require_once __DIR__ . '/controllers/AdminController.php';
 require_once __DIR__ . '/controllers/AdminProductoController.php';
 require_once __DIR__ . '/controllers/AdminUsuarioController.php';
 require_once __DIR__ . '/controllers/AdminPedidoController.php';
+require_once __DIR__ . '/controllers/MensajeController.php';
 
 // Verifica la cuenta y actualiza la sesión antes de mostrar una página.
 sincronizarSesion(new UsuarioModel($conexion));
@@ -131,6 +133,18 @@ switch ($paginaSolicitada) {
         (new AdminPedidoController($conexion))->informe();
         break;
         
+    case 'contacto':
+        (new MensajeController($conexion))->mostrarFormulario();
+        break;
+
+    case 'mensaje_enviar':
+        (new MensajeController($conexion))->enviar();
+        break;
+
+    case 'mis_mensajes':
+        (new MensajeController($conexion))->misMensajes();
+        break;
+    
     case 'sin_permiso':
         require __DIR__ . '/views/sin_permiso.php';
         break;
