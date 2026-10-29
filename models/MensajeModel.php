@@ -45,7 +45,7 @@ class MensajeModel{
 
         $orden = " ORDER BY m.fecha DESC";
 
-        if($filltro === 'sin_responder'){
+        if($filtro === 'sin_responder'){
             $sql.= " AND m.respuesta IS NULL";
             $orden = " ORDER BY m.fecha ASC";
         } elseif ($filtro === 'respondidos'){

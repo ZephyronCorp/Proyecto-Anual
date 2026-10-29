@@ -129,7 +129,7 @@ class AdminMensajeController {
     private function mostrarDetalle($mensaje, $aviso, $textoRespuesta) {
         $maxRespuesta = $this->maxRespuesta;
 
-        require __DIR__ . '/../views/admin/mensaje_detalle.php';
+        require __DIR__ . '/../views/admin/mensajes_detalle.php';
     }
 
     // Obtiene un aviso de la lista permitida.

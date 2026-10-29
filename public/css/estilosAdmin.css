@@ -381,6 +381,79 @@ tr.inactivo {
     flex-wrap: wrap;
 }
 
+/* Tabla de mensajes: permite desplazarse en pantallas pequeñas */
+.tabla-mensajes {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+/* Estado de las consultas */
+.estado-respondido {
+    background: #d4edda;
+    color: #155724;
+}
+
+.estado-sin-responder {
+    background: #fff3cd;
+    color: #856404;
+}
+
+/* Contenido de la consulta */
+.consulta-mensaje {
+    background: #1b1b1b;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-wrap: break-word;
+}
+
+/* Respuesta enviada */
+.respuesta-admin {
+    background: #242424;
+    border-left: 3px solid #f97316;
+    padding: 20px;
+    margin: 20px 0;
+    overflow-wrap: break-word;
+}
+
+/* Formulario para responder */
+.formulario-respuesta {
+    max-width: 700px;
+    margin-top: 20px;
+}
+
+.formulario-respuesta label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.campo-respuesta {
+    width: 100%;
+    padding: 12px;
+    background: #1b1b1b;
+    color: white;
+    border: 1px solid #777;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.boton-respuesta {
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: #f97316;
+    color: #161618;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-respuesta:hover {
+    background: #ff9800;
+}
+
 /* Footer */
 footer {
 
