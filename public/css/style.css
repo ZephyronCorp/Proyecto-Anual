@@ -247,25 +247,6 @@ header {
     transition: .3s;
 }
 
-/* Acceso flotante a mensajes */
-.boton-mensajes-flotante {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #f97316;
-    color: #161618;
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    z-index: 1001;
-}
-
-.boton-mensajes-flotante:hover {
-    background: #ff9800;
-}
-
 /* Pie de página */
 
 footer {

@@ -2,11 +2,13 @@
 
 require_once __DIR__ . '/../models/ProductoModel.php';
 require_once __DIR__ . '/../models/PedidoModel.php';
+require_once __DIR__ . '/../models/MensajeModel.php';
 
 class AdminController {
     private $conexion;
     private $productoModel;
     private $pedidoModel;
+    private $mensajeModel;
 
     public function __construct($conexion) {
         requerirRol(1);
@@ -14,6 +16,7 @@ class AdminController {
         $this->conexion = $conexion;
         $this->productoModel = new ProductoModel($conexion);
         $this->pedidoModel = new PedidoModel($conexion);
+        $this->mensajeModel = new MensajeModel($conexion);
     }
 
     public function panel() {
@@ -31,6 +34,9 @@ class AdminController {
             'estado' => 'pagado',
             'estado_envio' => 'preparando'
         ]);
+
+        // Cantidad de consultas que todavía no tienen respuesta.
+        $mensajesSinResponder = $this->mensajeModel->contarSinResponder();
 
         require __DIR__ . '/../views/admin.php';
     }

@@ -212,23 +212,30 @@ section {
     color: #721c24;
 }
 
-/* Acceso flotante a mensajes */
-.boton-mensajes-flotante {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #f97316;
-    color: #161618;
-    padding: 12px 20px;
+/* Aviso de mensajes pendientes */
+.alerta-mensajes {
+    width: 90%;
+    margin: 25px auto;
+    padding: 20px;
+    background: #1b1b1b;
+    border: 1px solid #f97316;
     border-radius: 8px;
-    text-decoration: none;
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-    z-index: 1001;
 }
 
-.boton-mensajes-flotante:hover {
-    background: #ff9800;
+.alerta-mensajes h2 {
+    margin-bottom: 10px;
+}
+
+.aviso-mensajes {
+    color: #ffbb55;
+}
+
+.alerta-mensajes a {
+    color: #f97316;
+}
+
+.alerta-mensajes a:hover {
+    color: #ff9800;
 }
 
 /* Footer */

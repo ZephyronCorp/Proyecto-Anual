@@ -1,8 +1,8 @@
     <?php if (estaLogueado()): ?>
         <a class="boton-mensajes-flotante"
-            href="index.php?pagina=mis_mensajes">
+            href="index.php?pagina=<?= esAdmin() ? 'admin_mensajes' : 'mis_mensajes' ?>">
             Mensajes
-        </a>
+    </a>
     <?php endif; ?>
     <footer>
         <hr>

@@ -40,7 +40,7 @@ class MensajeModel{
     public function listarAdmin($filtro = ''){
         $sql = "SELECT m.id_mensaje, m.asunto, m.fecha, (m.respuesta IS NOT NULL) AS respondido, u.nombre AS cliente_nombre, u.email AS cliente_email
         FROM Mensaje m
-        INNER JOIN Usuario u ON u.id_usuario = m.id_mensaje
+        INNER JOIN Usuario u ON u.id_usuario = m.id_usuario
         WHERE 1=1";
 
         $orden = " ORDER BY m.fecha DESC";

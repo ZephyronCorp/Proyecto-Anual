@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zona Joystick</title>
     <link rel="stylesheet" href="/Proyecto-Anual/public/css/<?php echo $css ?>">
-    <link rel="stylesheet" href="/Proyecto-Anual/public/css/mensajes.css">
+    <link rel="stylesheet" href="/Proyecto-Anual/public/css/mensaje.css">
     <link rel="icon" href="/Proyecto-Anual/public/img/favicon.ico" type="image/x-icon">
 </head>
 

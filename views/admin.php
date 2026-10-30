@@ -30,6 +30,28 @@ require __DIR__ . '/header.php';
         <p>Ventas y transacciones por rango de fechas.</p>
         <a href="index.php?pagina=admin_informe">Ver informe</a>
     </article>
+
+    <article class="tarjeta">
+        <h2>Mensajes</h2>
+        <p>Leer las consultas de los clientes y responderlas.</p>
+        <a href="index.php?pagina=admin_mensajes">Ver mensajes</a>
+    </article>  
+</section>
+
+<section class="alerta-mensajes">
+    <h2>Mensajes de clientes</h2>
+
+    <?php if ($mensajesSinResponder === 0): ?>
+        <p>No hay mensajes sin responder.</p>
+    <?php else: ?>
+        <p class="aviso-mensajes">
+            <?= (int)$mensajesSinResponder ?> mensaje(s) sin responder.
+
+            <a href="index.php?pagina=admin_mensajes&filtro=sin_responder">
+                Ver consultas pendientes
+            </a>
+        </p>
+    <?php endif; ?>
 </section>
 <p class = "frase" >Agregar, editar, dar de baja o reactivar productos del catálogo.</p>
 
